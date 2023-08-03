@@ -1,3 +1,7 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectEvents } from '../../redux/selectors';
+import { getAllEvents } from '../../redux/operation';
 import { Main, Section, BtnWrap, FilterBtn, PlusBtn } from './MainPage.styled';
 import { MainContainer } from '../../components/Container/Container';
 import { EventList } from '../../components/EventList/EventList';
@@ -7,6 +11,14 @@ import { ReactComponent as Filter2 } from '../../assets/filter2.svg';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
 
 const MainPage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllEvents());
+  }, [dispatch]);
+
+  const events = useSelector(selectEvents);
+
   return (
     <Main>
       <Section>
@@ -22,7 +34,7 @@ const MainPage = () => {
               <Plus />
             </PlusBtn>
           </BtnWrap>
-          <EventList />
+          <EventList events={events} />
           <Pagination />
         </MainContainer>
       </Section>

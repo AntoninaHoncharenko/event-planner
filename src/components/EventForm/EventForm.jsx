@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { nanoid } from 'nanoid';
 import {
   Form,
   Label,
@@ -22,14 +23,18 @@ import { ReactComponent as SelectIconUp } from '../../assets/arrow-select.svg';
 import { ReactComponent as SelectIconDown } from '../../assets/arrow-select1.svg';
 import { ReactComponent as DeleteIcon } from '../../assets/close-input.svg';
 import { categories, priorities } from './data';
+import { Calendar } from './DatePicker/DatePicker';
+import { Time } from './TimePicker/TimePicker';
 
 export const EventForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
-  const [file, setFile] = useState(null);
-  const [category, setCategory] = useState('Select');
-  const [priority, setPriority] = useState('Select');
+  const [picture, setPicture] = useState(null);
+  const [category, setCategory] = useState('Select category');
+  const [priority, setPriority] = useState('Select priority');
+  const [date, setDate] = useState(null);
+  const [time, setTime] = useState(null);
 
   const fileInputRef = useRef(null);
 
@@ -43,9 +48,9 @@ export const EventForm = () => {
       setDescription('');
     } else if (name === 'location') {
       setLocation('');
-    } else if (name === 'file') {
+    } else if (name === 'picture') {
       fileInputRef.current.value = '';
-      setFile(null);
+      setPicture(null);
     }
   };
 
@@ -67,21 +72,8 @@ export const EventForm = () => {
     }
   };
 
-  const toggleOptionsValue = value => {
-    if (value === 'category') {
-      category !== 'Select category'
-        ? setCategory('Select category')
-        : setCategory('Select');
-    } else {
-      priority !== 'Select priority'
-        ? setPriority('Select priority')
-        : setPriority('Select');
-    }
-  };
-
   const changeOptions = value => {
     toggleOptions(value);
-    toggleOptionsValue(value);
   };
 
   const setCategoryValue = (category, value) => {
@@ -94,15 +86,39 @@ export const EventForm = () => {
     toggleOptions(value);
   };
 
-  const setFileValue = event => {
+  const setPictureValue = event => {
     const file = event.target.files[0];
-    if (file) {
-      setFile(file);
+    const reader = new FileReader();
+    reader.addEventListener('load', event => {
+      const buffer = event.target.result;
+      const blob = new Blob([buffer], { type: file.type });
+      const url = URL.createObjectURL(blob);
+      setPicture(url);
+    });
+    reader.readAsArrayBuffer(file);
+  };
+
+  const formData = new FormData();
+
+  formData.append('title', title);
+  formData.append('description', description);
+  formData.append('picture', picture);
+  formData.append('location', location);
+  formData.append('date', date);
+  formData.append('time', time);
+  formData.append('category', category);
+  formData.append('priority', priority);
+  formData.append('id', nanoid());
+
+  const onFormSubmit = e => {
+    e.preventDefault();
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
     }
   };
 
   return (
-    <Form>
+    <Form onSubmit={onFormSubmit}>
       <Label htmlFor="title">Title</Label>
       <InpurWrap>
         <Input
@@ -115,6 +131,7 @@ export const EventForm = () => {
           <DeleteIcon />
         </DeleteBtn>
       </InpurWrap>
+
       <Label htmlFor="descr">Description</Label>
       <InpurWrap>
         <TextArea
@@ -128,8 +145,13 @@ export const EventForm = () => {
           <DeleteIcon />
         </DeleteBtn>
       </InpurWrap>
+
       <Label htmlFor="date">Select date</Label>
+      <Calendar setDate={setDate} />
+
       <Label htmlFor="time">Select time</Label>
+      <Time setTime={setTime} />
+
       <Label htmlFor="location">Location</Label>
       <InpurWrap>
         <Input
@@ -175,17 +197,18 @@ export const EventForm = () => {
             id="picture"
             type="file"
             accept=".jpg, .jpeg, .png"
-            onChange={setFileValue}
+            onChange={setPictureValue}
             ref={fileInputRef}
           />
           <Wrap>
-            {file && <FileText>File added</FileText>}
-            <DeleteBtn type="button" onClick={() => clearInput('file')}>
+            {picture && <FileText>Picture added</FileText>}
+            <DeleteBtn type="button" onClick={() => clearInput('picture')}>
               <DeleteIcon />
             </DeleteBtn>
           </Wrap>
         </InputFIleWrap>
       </Label>
+      {/* {picture && <img src={picture} alt="picture" />} */}
 
       <FakeLabel>Priority</FakeLabel>
       <SelectWrap>

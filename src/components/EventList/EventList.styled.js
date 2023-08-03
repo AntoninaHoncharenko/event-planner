@@ -3,6 +3,8 @@ import { colors } from '../../vars';
 
 export const List = styled.ul`
   margin-bottom: 40px;
+  display: grid;
+  gap: 24px;
 `;
 
 export const MoreBtn = styled.button`
@@ -45,6 +47,7 @@ export const Card = styled.li`
   width: 272px;
   /* height: 240px; */
   border-radius: 12px;
+  overflow: hidden;
   background-color: ${colors.white};
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
 
@@ -97,7 +100,17 @@ export const Priority = styled.p`
   padding: 6px 12px;
   background-color: ${colors.white};
   border-radius: 8px;
-  color: ${colors.high};
+  color: ${props => {
+    switch (props.priority) {
+      case 'High':
+        return '#FF2B77';
+      case 'Medium':
+        return '#E2A300';
+      default:
+        return '#6BD475';
+    }
+  }};
+
   text-align: center;
   font-size: 14px;
   font-weight: 500;

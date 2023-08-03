@@ -1,3 +1,9 @@
+import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectOneEvent } from '../../redux/selectors';
+import { getOneEvent, deleteEvent } from '../../redux/operation';
+import { PageTitle } from '../../components/Title/Title';
 import {
   Card,
   Image,
@@ -12,29 +18,46 @@ import {
 } from './EventCard.styled';
 
 export const EventCard = () => {
+  const { eventId } = useParams();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOneEvent(eventId));
+  }, [dispatch, eventId]);
+
+  const event = useSelector(selectOneEvent);
+
+  const navigate = useNavigate();
+
+  const handleDelete = () => {
+    dispatch(deleteEvent(eventId));
+    navigate('/', { replace: true });
+  };
+
   return (
-    <Card>
-      <Image src="/src/assets/img.jpg" alt="image" />
-      <InfoWrap>
-        <Text>
-          Discover an enchanting evening celebrating the world of art at our
-          exclusive gallery opening.
-        </Text>
-        <MarksWrap>
-          <Mark>Art</Mark>
-          <Mark>High</Mark>
-          <Mark>Kyiv</Mark>
-        </MarksWrap>
-        <Date>
-          <span>12.07 </span>
-          at
-          <span> 12:00 am</span>
-        </Date>
-        <BtnWrap>
-          <EditBtn>Edit</EditBtn>
-          <DeleteBtn>Delete event</DeleteBtn>
-        </BtnWrap>
-      </InfoWrap>
-    </Card>
+    <>
+      <PageTitle>{event.title}</PageTitle>
+      <Card>
+        <Image src={event.picture} alt="image" />
+        <InfoWrap>
+          <Text>{event.description}</Text>
+          <MarksWrap>
+            <Mark>{event.category}</Mark>
+            <Mark priority={event.priority}>{event.priority}</Mark>
+            <Mark>{event.location}</Mark>
+          </MarksWrap>
+          <Date>
+            <span>{event.date} </span>
+            at
+            <span> {event.time}</span>
+          </Date>
+          <BtnWrap>
+            <EditBtn>Edit</EditBtn>
+            <DeleteBtn onClick={handleDelete}>Delete event</DeleteBtn>
+          </BtnWrap>
+        </InfoWrap>
+      </Card>
+    </>
   );
 };

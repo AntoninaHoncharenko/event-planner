@@ -154,10 +154,6 @@ export const Select = styled.div`
   color: ${colors.text};
   font-size: 16px;
   line-height: 1.5;
-
-  &:focus {
-    border-color: ${colors.accent};
-  }
 `;
 
 export const SelectText = styled.p`

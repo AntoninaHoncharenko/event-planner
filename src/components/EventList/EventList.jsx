@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   List,
   Card,
@@ -15,38 +16,43 @@ import {
   MoreBtn,
 } from './EventList.styled';
 
-export const EventList = () => {
+export const EventList = ({ events }) => {
   return (
     <List>
-      <Card>
-        <ImgThumb>
-          <Image src="/src/assets/img.jpg" alt="image" />
-          <MarksWrap>
-            <Category>Art</Category>
-            <Priority>High</Priority>
-          </MarksWrap>
-          <Overlay>
-            <DetailsWrap>
-              <p>
-                <span>12.07 </span>
-                at
-                <span> 12:00</span>
-              </p>
-              <p>Kyiv</p>
-            </DetailsWrap>
-          </Overlay>
-        </ImgThumb>
-        <InfoWrap>
-          <Title>Galery Opening</Title>
-          <Text>
-            Discover an enchanting evening celebrating the world of art at our
-            exclusive gallery opening.
-          </Text>
-          <Link to="/1">
-            <MoreBtn>More info</MoreBtn>
-          </Link>
-        </InfoWrap>
-      </Card>
+      {events.map(event => {
+        return (
+          <Card key={event.id}>
+            <ImgThumb>
+              <Image src={event.picture} alt="image" />
+              <MarksWrap>
+                <Category>{event.category}</Category>
+                <Priority priority={event.priority}>{event.priority}</Priority>
+              </MarksWrap>
+              <Overlay>
+                <DetailsWrap>
+                  <p>
+                    <span>{event.date} </span>
+                    at
+                    <span> {event.time}</span>
+                  </p>
+                  <p>{event.location}</p>
+                </DetailsWrap>
+              </Overlay>
+            </ImgThumb>
+            <InfoWrap>
+              <Title>{event.title}</Title>
+              <Text>{event.description}</Text>
+              <Link to={`/${event.id}`}>
+                <MoreBtn>More info</MoreBtn>
+              </Link>
+            </InfoWrap>
+          </Card>
+        );
+      })}
     </List>
   );
+};
+
+EventList.propTypes = {
+  events: PropTypes.array.isRequired,
 };

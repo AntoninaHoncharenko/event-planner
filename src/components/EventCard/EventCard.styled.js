@@ -29,6 +29,7 @@ export const Text = styled.p`
 
 export const MarksWrap = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 12px;
 `;
@@ -40,7 +41,19 @@ export const Mark = styled.li`
   background-color: ${colors.white};
   box-shadow: 4px 5px 9px 0px rgba(166, 141, 174, 0.28);
 
-  color: ${colors.accent};
+  color: ${props => {
+    switch (props.priority) {
+      case 'High':
+        return '#FF2B77';
+      case 'Medium':
+        return '#E2A300';
+      case 'Low':
+        return '#6BD475';
+      default:
+        return '#7B61FF';
+    }
+  }};
+
   text-align: center;
   font-size: 14px;
   font-weight: 500;
