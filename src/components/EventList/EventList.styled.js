@@ -37,7 +37,7 @@ export const Overlay = styled.div`
 
 export const InfoWrap = styled.div`
   width: 100%;
-  height: 144px;
+  height: 150px;
   padding: 16px;
   background-color: ${colors.white};
   transition: 300ms linear;
@@ -136,7 +136,7 @@ export const Title = styled.h2`
 
 export const Text = styled.p`
   width: 240px;
-  height: 72px;
+  height: 78px;
   color: #49454f;
   font-size: 14px;
   line-height: 1.42;

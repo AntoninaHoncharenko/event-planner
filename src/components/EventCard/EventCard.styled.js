@@ -60,7 +60,7 @@ export const Mark = styled.li`
   line-height: 1.42;
 `;
 
-export const Date = styled.p`
+export const EventDate = styled.p`
   width: 139px;
   height: 32px;
   padding: 4px 12px;

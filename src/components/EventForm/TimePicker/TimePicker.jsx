@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 export const Time = ({ setTime }) => {
   const onChange = (time, timeString) => {
     setTime(timeString);
+    console.log(time);
+    console.log(timeString);
   };
 
   return (

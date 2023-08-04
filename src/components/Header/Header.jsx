@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+import { updateFilter } from '../../redux/filterSlice';
 import {
   HeaderWrap,
   Title,
@@ -14,6 +16,13 @@ import { ReactComponent as ArrowIcon } from '../../assets/arrow.svg';
 import { ReactComponent as SearchIcon } from '../../assets/search.svg';
 
 export const Header = () => {
+  const dispatch = useDispatch();
+
+  const handleInputChange = e => {
+    console.log(e.target.value);
+    dispatch(updateFilter(e.target.value));
+  };
+
   return (
     <HeaderWrap>
       <MainContainer>
@@ -30,7 +39,12 @@ export const Header = () => {
           <Label htmlFor="query">
             <SearchIcon />
           </Label>
-          <Input type="text" id="query" placeholder="Search by keywords" />
+          <Input
+            type="text"
+            id="query"
+            placeholder="Search by keywords"
+            onChange={handleInputChange}
+          />
         </InputWrap>
       </MainContainer>
     </HeaderWrap>

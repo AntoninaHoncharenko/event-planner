@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectOneEvent } from '../../redux/selectors';
 import { getOneEvent, deleteEvent } from '../../redux/operation';
 import { PageTitle } from '../../components/Title/Title';
+import { format } from 'date-fns';
 import {
   Card,
   Image,
@@ -11,7 +12,7 @@ import {
   Text,
   MarksWrap,
   Mark,
-  Date,
+  EventDate,
   BtnWrap,
   EditBtn,
   DeleteBtn,
@@ -47,11 +48,11 @@ export const EventCard = () => {
             <Mark priority={event.priority}>{event.priority}</Mark>
             <Mark>{event.location}</Mark>
           </MarksWrap>
-          <Date>
-            <span>{event.date} </span>
+          <EventDate>
+            {event.date && <span>{format(new Date(event.date), 'd.MM')} </span>}
             at
             <span> {event.time}</span>
-          </Date>
+          </EventDate>
           <BtnWrap>
             <EditBtn>Edit</EditBtn>
             <DeleteBtn onClick={handleDelete}>Delete event</DeleteBtn>

@@ -15,6 +15,7 @@ import {
   Text,
   MoreBtn,
 } from './EventList.styled';
+import { format } from 'date-fns';
 
 export const EventList = ({ events }) => {
   return (
@@ -31,7 +32,7 @@ export const EventList = ({ events }) => {
               <Overlay>
                 <DetailsWrap>
                   <p>
-                    <span>{event.date} </span>
+                    <span>{format(new Date(event.date), 'd.MM')} </span>
                     at
                     <span> {event.time}</span>
                   </p>

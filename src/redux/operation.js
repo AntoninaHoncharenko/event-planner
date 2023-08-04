@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://64cacaaf700d50e3c7054b1e.mockapi.io/api/';
@@ -50,3 +50,5 @@ export const deleteEvent = createAsyncThunk(
     }
   }
 );
+
+export const updateFilter = createAction('events/updateFilter');

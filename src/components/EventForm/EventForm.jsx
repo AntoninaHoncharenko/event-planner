@@ -22,7 +22,7 @@ import {
 import { ReactComponent as SelectIconUp } from '../../assets/arrow-select.svg';
 import { ReactComponent as SelectIconDown } from '../../assets/arrow-select1.svg';
 import { ReactComponent as DeleteIcon } from '../../assets/close-input.svg';
-import { categories, priorities } from './data';
+import { categories, priorities } from '../../data';
 import { Calendar } from './DatePicker/DatePicker';
 import { Time } from './TimePicker/TimePicker';
 
