@@ -7,7 +7,7 @@ import { Main, Section, Wrap, Title } from './MainPage.styled';
 import { MainContainer } from '../../components/Container/Container';
 import { EventList } from '../../components/EventList/EventList';
 import { Pagination } from '../../components/Pagination/Pagination';
-import { Buttons } from '../../components/MainPageBtns/Buttons';
+import { BtnsFilters } from '../../components/BtnsFilters/BtnsFilters';
 import { PageTitle } from '../../components/Title/Title';
 
 const MainPage = () => {
@@ -92,7 +92,7 @@ const MainPage = () => {
         <MainContainer>
           <Wrap>
             {desk && <Title>My events</Title>}
-            <Buttons
+            <BtnsFilters
               filterByName={filterByName}
               filterByPriority={filterByPriority}
               filterByDate={filterByDate}

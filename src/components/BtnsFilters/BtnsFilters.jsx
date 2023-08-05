@@ -20,10 +20,10 @@ import {
   CategoryTitle,
   CategoryItem,
   FilterItem,
-} from './Buttons.styled';
+} from './BtnsFilters.styled';
 import { categories } from '../../data';
 
-export const Buttons = ({
+export const BtnsFilters = ({
   filterByName,
   filterByPriority,
   filterByDate,
@@ -174,7 +174,7 @@ export const Buttons = ({
   );
 };
 
-Buttons.propTypes = {
+BtnsFilters.propTypes = {
   filterByName: PropTypes.func.isRequired,
   filterByPriority: PropTypes.func.isRequired,
   filterByDate: PropTypes.func.isRequired,

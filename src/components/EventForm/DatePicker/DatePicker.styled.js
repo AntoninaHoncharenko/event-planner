@@ -5,7 +5,7 @@ export const Wrap = styled.div`
   width: 240px;
   height: 348px;
   border-radius: 11px;
-  background: ${colors.white};
+  background-color: ${colors.white};
   box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.07);
 
   @media (min-width: 768px) {
@@ -25,7 +25,7 @@ export const Select = styled.div`
   padding: 16px 12px;
   border-radius: 8px;
   border: 1px solid ${colors.divider};
-  background: ${colors.white};
+  background-color: ${colors.white};
 
   color: ${colors.text};
   font-size: 16px;

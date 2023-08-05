@@ -31,8 +31,6 @@ export const Wrap = styled.div`
     width: 100%;
     flex-wrap: nowrap;
   }
-  @media (min-width: 1440px) {
-  }
 `;
 
 export const LangSwitch = styled.div`

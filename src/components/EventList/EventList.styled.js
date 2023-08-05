@@ -59,7 +59,6 @@ export const InfoWrap = styled.div`
 
 export const Card = styled.li`
   width: 272px;
-  /* height: 240px; */
   border-radius: 12px;
   overflow: hidden;
   background-color: ${colors.white};

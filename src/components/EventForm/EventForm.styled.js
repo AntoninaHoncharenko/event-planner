@@ -192,9 +192,6 @@ export const Wrap = styled.div`
   @media (min-width: 768px) {
     width: 298px;
   }
-
-  @media (min-width: 1440px) {
-  }
 `;
 
 export const FileText = styled.p`
