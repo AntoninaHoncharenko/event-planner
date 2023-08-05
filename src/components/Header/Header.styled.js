@@ -4,6 +4,13 @@ import { colors } from '../../vars';
 export const HeaderWrap = styled.header`
   padding: 32px 0 24px;
   border-bottom: 1px solid ${colors.accent};
+
+  @media (min-width: 768px) {
+    padding: 26px 0 18px;
+  }
+  @media (min-width: 1440px) {
+    padding: 22px 0;
+  }
 `;
 
 export const Title = styled.h1`
@@ -16,9 +23,16 @@ export const Title = styled.h1`
 export const Wrap = styled.div`
   display: flex;
   width: 272px;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+
+  @media (min-width: 768px) {
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+  @media (min-width: 1440px) {
+  }
 `;
 
 export const LangSwitch = styled.div`
@@ -32,6 +46,10 @@ export const LangSwitch = styled.div`
   border-radius: 8px;
   background-color: ${colors.white};
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
+
+  @media (min-width: 768px) {
+    order: 1;
+  }
 `;
 
 export const LangText = styled.p`
@@ -52,7 +70,17 @@ export const LangBtn = styled.button`
 export const InputWrap = styled.div`
   width: 272px;
   height: 48px;
+  margin-top: 24px;
   position: relative;
+
+  @media (min-width: 768px) {
+    width: 368px;
+    margin: 0 24px 0 80px;
+  }
+  @media (min-width: 1440px) {
+    width: 410px;
+    margin: 0 24px 0 auto;
+  }
 `;
 
 export const Input = styled.input`
@@ -75,6 +103,13 @@ export const Input = styled.input`
     font-size: 14px;
     font-weight: 300;
     line-height: 1;
+  }
+
+  @media (min-width: 768px) {
+    width: 368px;
+  }
+  @media (min-width: 1440px) {
+    width: 410px;
   }
 `;
 

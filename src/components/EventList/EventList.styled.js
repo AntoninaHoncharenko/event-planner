@@ -5,6 +5,14 @@ export const List = styled.ul`
   margin-bottom: 40px;
   display: grid;
   gap: 24px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 
 export const MoreBtn = styled.button`
@@ -13,16 +21,22 @@ export const MoreBtn = styled.button`
   height: 40px;
   padding: 10px 24px;
   border-radius: 8px;
-  background: ${colors.accent};
+  background-color: ${colors.accent};
   border: none;
   margin-top: 8px;
   margin-left: auto;
+  transition: 300ms linear;
+  cursor: pointer;
 
   color: ${colors.white};
   text-align: center;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.42;
+
+  &:hover {
+    background-color: #6243ff;
+  }
 `;
 
 export const Overlay = styled.div`
@@ -50,6 +64,14 @@ export const Card = styled.li`
   overflow: hidden;
   background-color: ${colors.white};
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
+
+  @media (min-width: 768px) {
+    width: 332px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 302px;
+  }
 
   &:hover ${MoreBtn} {
     display: block;
@@ -118,7 +140,6 @@ export const Priority = styled.p`
 `;
 
 export const DetailsWrap = styled.div`
-  height: 40px;
   display: flex;
   justify-content: space-between;
   color: ${colors.accent};

@@ -8,6 +8,55 @@ export const Form = styled.form`
   border-radius: 8px;
   background-color: ${colors.white};
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
+
+  @media (min-width: 768px) {
+    width: 688px;
+    padding: 40px 24px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 1280px;
+    padding: 40px 40px 54px;
+  }
+`;
+
+export const FlexWrap = styled.ul`
+  display: grid;
+  grid-gap: 20px 0px;
+
+  @media (min-width: 768px) {
+    grid-auto-flow: column;
+    grid-gap: 20px 24px;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1440px) {
+    grid-gap: 20px 42px;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+export const Flexitem = styled.li`
+  width: 240px;
+  height: 80px;
+
+  &:nth-child(2) {
+    height: 180px;
+  }
+
+  @media (min-width: 768px) {
+    width: 308px;
+
+    &:nth-child(2) {
+      grid-row-end: span 2;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    width: 372px;
+  }
 `;
 
 export const Label = styled.label`
@@ -19,7 +68,7 @@ export const Label = styled.label`
   margin-bottom: 8px;
 `;
 
-export const InpurWrap = styled.div`
+export const InputWrap = styled.div`
   position: relative;
 `;
 
@@ -32,14 +81,21 @@ export const DeleteBtn = styled.button`
 
   position: absolute;
   top: 16px;
-  right: 12px;
+  left: 204px;
+
+  @media (min-width: 768px) {
+    left: 272px;
+  }
+
+  @media (min-width: 1440px) {
+    left: 336px;
+  }
 `;
 
 export const Input = styled.input`
   width: 240px;
   height: 56px;
   padding: 16px 36px 16px 12px;
-  margin-bottom: 20px;
   border-radius: 8px;
   border: 1px solid ${colors.divider};
   outline: none;
@@ -47,6 +103,14 @@ export const Input = styled.input`
   color: ${colors.text};
   font-size: 16px;
   line-height: 1.5;
+
+  @media (min-width: 768px) {
+    width: 308px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 372px;
+  }
 
   &:focus {
     border-color: ${colors.accent};
@@ -57,7 +121,6 @@ export const TextArea = styled.textarea`
   width: 240px;
   height: 156px;
   padding: 16px 12px;
-  margin-bottom: 20px;
   border-radius: 8px;
   border: 1px solid ${colors.divider};
   outline: none;
@@ -66,6 +129,14 @@ export const TextArea = styled.textarea`
   color: ${colors.text};
   font-size: 16px;
   line-height: 1.5;
+
+  @media (min-width: 768px) {
+    width: 308px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 372px;
+  }
 
   &:focus {
     border-color: ${colors.accent};
@@ -80,17 +151,32 @@ export const InputFIle = styled.input`
   border-radius: 8px;
   border: 1px solid ${colors.divider};
 
+  @media (min-width: 768px) {
+    width: 308px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 372px;
+  }
+
   &:focus {
     border-color: ${colors.accent};
   }
 `;
 
-export const InputFIleWrap = styled.div`
+export const FileWrap = styled.div`
   width: 240px;
-  height: 56px;
-  margin-bottom: 28px;
+  height: 64px;
   background-color: ${colors.white};
   position: relative;
+
+  @media (min-width: 768px) {
+    width: 308px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 372px;
+  }
 `;
 
 export const Wrap = styled.div`
@@ -102,6 +188,13 @@ export const Wrap = styled.div`
   position: absolute;
   top: 10px;
   left: 2px;
+
+  @media (min-width: 768px) {
+    width: 298px;
+  }
+
+  @media (min-width: 1440px) {
+  }
 `;
 
 export const FileText = styled.p`
@@ -111,6 +204,7 @@ export const FileText = styled.p`
 `;
 
 export const Button = styled.button`
+  display: block;
   width: 240px;
   height: 56px;
   margin-top: 40px;
@@ -118,11 +212,26 @@ export const Button = styled.button`
   border-radius: 8px;
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
   border: none;
+  transition: 300ms linear;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #6243ff;
+  }
 
   color: ${colors.white};
   font-size: 16px;
   font-weight: 500;
   line-height: normal;
+
+  @media (min-width: 768px) {
+    width: 193px;
+    margin-left: auto;
+  }
+
+  @media (min-width: 1440px) {
+    margin-top: 60px;
+  }
 `;
 
 export const SelectWrap = styled.div`
@@ -143,7 +252,6 @@ export const Select = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 16px 12px;
-  margin-bottom: 20px;
   border-radius: 8px;
 
   border: 1px solid
@@ -154,6 +262,14 @@ export const Select = styled.div`
   color: ${colors.text};
   font-size: 16px;
   line-height: 1.5;
+
+  @media (min-width: 768px) {
+    width: 308px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 372px;
+  }
 `;
 
 export const SelectText = styled.p`
@@ -174,6 +290,14 @@ export const OptionsWrap = styled.ul`
   position: absolute;
   top: 74px;
   z-index: 3;
+
+  @media (min-width: 768px) {
+    width: 308px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 372px;
+  }
 `;
 
 export const Option = styled.li`

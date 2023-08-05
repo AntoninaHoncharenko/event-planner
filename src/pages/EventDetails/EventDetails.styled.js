@@ -9,4 +9,12 @@ export const Main = styled.main`
 
 export const Section = styled.section`
   padding: 42px 0 136px;
+
+  @media (min-width: 768px) {
+    padding: 40px 0 263px;
+  }
+
+  @media (min-width: 1440px) {
+    padding: 18px 0 307px;
+  }
 `;

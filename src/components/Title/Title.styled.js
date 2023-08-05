@@ -7,4 +7,8 @@ export const Title = styled.h2`
   font-weight: 600;
   line-height: normal;
   margin-bottom: 24px;
+
+  @media (min-width: 768px) {
+    font-size: 32px;
+  }
 `;

@@ -1,11 +1,29 @@
 import styled from 'styled-components';
 import { colors } from '../../vars';
 
+export const Title = styled.h2`
+  color: ${colors.text};
+  font-size: 32px;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 14px;
+  margin-left: 326px;
+`;
+
 export const Card = styled.div`
   width: 272px;
   border-radius: 8px;
   background-color: ${colors.white};
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
+
+  @media (min-width: 768px) {
+    width: 688px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 628px;
+    margin: 0 auto;
+  }
 `;
 
 export const Image = styled.img`
@@ -13,11 +31,22 @@ export const Image = styled.img`
   width: 100%;
   height: 168px;
   object-fit: cover;
-  object-position: 0% 30%;
+
+  @media (min-width: 768px) {
+    height: 272px;
+  }
 `;
 
 export const InfoWrap = styled.div`
   padding: 24px 16px 40px;
+
+  @media (min-width: 768px) {
+    padding: 24px 24px 40px;
+  }
+
+  @media (min-width: 1440px) {
+    padding: 20px 10px 40px;
+  }
 `;
 
 export const Text = styled.p`
@@ -32,6 +61,14 @@ export const MarksWrap = styled.ul`
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 12px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 40px;
+  }
+
+  @media (min-width: 1440px) {
+    margin-bottom: 24px;
+  }
 `;
 
 export const Mark = styled.li`
@@ -63,7 +100,7 @@ export const Mark = styled.li`
 export const EventDate = styled.p`
   width: 139px;
   height: 32px;
-  padding: 4px 12px;
+  padding: 4px 10px;
   margin-bottom: 40px;
   border-radius: 8px;
   background-color: ${colors.white};
@@ -74,12 +111,21 @@ export const EventDate = styled.p`
   font-size: 14px;
   font-weight: 400;
   line-height: 1.71;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+  }
 `;
 
 export const BtnWrap = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+
+  @media (min-width: 768px) {
+    width: 179px;
+    margin-left: auto;
+  }
 `;
 
 export const EditBtn = styled.button`
@@ -89,6 +135,16 @@ export const EditBtn = styled.button`
   border-radius: 4px;
   background-color: ${colors.white};
   border: 1px solid ${colors.accent};
+  transition: 300ms linear;
+  cursor: pointer;
+
+  @media (min-width: 768px) {
+    width: 55px;
+  }
+
+  &:hover {
+    background-color: #fefcff;
+  }
 
   color: ${colors.accent};
   text-align: center;
@@ -104,6 +160,12 @@ export const DeleteBtn = styled.button`
   border-radius: 4px;
   background: ${colors.accent};
   border: none;
+  transition: 300ms linear;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #6243ff;
+  }
 
   color: ${colors.white};
   text-align: center;

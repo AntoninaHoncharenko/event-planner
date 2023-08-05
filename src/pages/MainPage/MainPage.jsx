@@ -1,15 +1,22 @@
 import { useState, useEffect } from 'react';
+import { useMedia } from 'react-use';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectEvents, selectFilter } from '../../redux/selectors';
 import { getAllEvents } from '../../redux/operation';
-import { Main, Section } from './MainPage.styled';
+import { Main, Section, Wrap, Title } from './MainPage.styled';
 import { MainContainer } from '../../components/Container/Container';
 import { EventList } from '../../components/EventList/EventList';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { Buttons } from '../../components/MainPageBtns/Buttons';
+import { PageTitle } from '../../components/Title/Title';
 
 const MainPage = () => {
   const [events, setEvents] = useState([]);
+
+  const tablet = useMedia('(min-width: 768px, max-width: 1339px,)', {
+    defaultState: true,
+  });
+  const desk = useMedia('(min-width: 1440px)', { defaultState: true });
 
   const dispatch = useDispatch();
   const allEvents = useSelector(selectEvents);
@@ -83,14 +90,18 @@ const MainPage = () => {
     <Main>
       <Section>
         <MainContainer>
-          <Buttons
-            filterByName={filterByName}
-            filterByPriority={filterByPriority}
-            filterByDate={filterByDate}
-            filterByCategory={filterByCategory}
-          />
+          <Wrap>
+            {desk && <Title>My events</Title>}
+            <Buttons
+              filterByName={filterByName}
+              filterByPriority={filterByPriority}
+              filterByDate={filterByDate}
+              filterByCategory={filterByCategory}
+            />
+          </Wrap>
+          {tablet && <PageTitle>My events</PageTitle>}
           <EventList events={events} />
-          <Pagination />
+          {/* <Pagination /> */}
         </MainContainer>
       </Section>
     </Main>

@@ -2,8 +2,10 @@ import { useState, useRef } from 'react';
 import { nanoid } from 'nanoid';
 import {
   Form,
+  FlexWrap,
+  Flexitem,
   Label,
-  InpurWrap,
+  InputWrap,
   DeleteBtn,
   Input,
   TextArea,
@@ -14,7 +16,7 @@ import {
   OptionsWrap,
   Option,
   InputFIle,
-  InputFIleWrap,
+  FileWrap,
   Wrap,
   FileText,
   Button,
@@ -119,121 +121,141 @@ export const EventForm = () => {
 
   return (
     <Form onSubmit={onFormSubmit}>
-      <Label htmlFor="title">Title</Label>
-      <InpurWrap>
-        <Input
-          id="title"
-          type="text"
-          value={title}
-          onChange={e => handleInputChange('title', e.currentTarget.value)}
-        />
-        <DeleteBtn type="button" onClick={() => clearInput('title')}>
-          <DeleteIcon />
-        </DeleteBtn>
-      </InpurWrap>
-
-      <Label htmlFor="descr">Description</Label>
-      <InpurWrap>
-        <TextArea
-          id="descr"
-          value={description}
-          onChange={e =>
-            handleInputChange('description', e.currentTarget.value)
-          }
-        />
-        <DeleteBtn type="button" onClick={() => clearInput('description')}>
-          <DeleteIcon />
-        </DeleteBtn>
-      </InpurWrap>
-
-      <Label htmlFor="date">Select date</Label>
-      <Calendar setDate={setDate} />
-
-      <Label htmlFor="time">Select time</Label>
-      <Time setTime={setTime} />
-
-      <Label htmlFor="location">Location</Label>
-      <InpurWrap>
-        <Input
-          id="location"
-          type="text"
-          value={location}
-          onChange={e => handleInputChange('location', e.currentTarget.value)}
-        />
-        <DeleteBtn type="button" onClick={() => clearInput('location')}>
-          <DeleteIcon />
-        </DeleteBtn>
-      </InpurWrap>
-
-      <FakeLabel>Category</FakeLabel>
-      <SelectWrap>
-        <Select
-          onClick={() => changeOptions('category')}
-          isCategoriesOpen={isCategoriesOpen}
-        >
-          <SelectText category={category}>{category}</SelectText>
-          {isCategoriesOpen ? <SelectIconDown /> : <SelectIconUp />}
-        </Select>
-        {isCategoriesOpen && (
-          <OptionsWrap>
-            {categories.map(category => {
-              return (
-                <Option
-                  key={category}
-                  onClick={() => setCategoryValue(category, 'category')}
-                >
-                  {category}
-                </Option>
-              );
-            })}
-          </OptionsWrap>
-        )}
-      </SelectWrap>
-
-      <Label htmlFor="picture">
-        Add picture
-        <InputFIleWrap>
-          <InputFIle
-            id="picture"
-            type="file"
-            accept=".jpg, .jpeg, .png"
-            onChange={setPictureValue}
-            ref={fileInputRef}
-          />
-          <Wrap>
-            {picture && <FileText>Picture added</FileText>}
-            <DeleteBtn type="button" onClick={() => clearInput('picture')}>
+      <FlexWrap>
+        <Flexitem>
+          <Label htmlFor="title">Title</Label>
+          <InputWrap>
+            <Input
+              id="title"
+              type="text"
+              value={title}
+              onChange={e => handleInputChange('title', e.currentTarget.value)}
+            />
+            <DeleteBtn type="button" onClick={() => clearInput('title')}>
               <DeleteIcon />
             </DeleteBtn>
-          </Wrap>
-        </InputFIleWrap>
-      </Label>
-      {/* {picture && <img src={picture} alt="picture" />} */}
+          </InputWrap>
+        </Flexitem>
 
-      <FakeLabel>Priority</FakeLabel>
-      <SelectWrap>
-        <Select
-          onClick={() => changeOptions('priority')}
-          isPrioritiesOpen={isPrioritiesOpen}
-        >
-          <SelectText priority={priority}>{priority}</SelectText>
-          {isPrioritiesOpen ? <SelectIconDown /> : <SelectIconUp />}
-        </Select>
-        {isPrioritiesOpen && (
-          <OptionsWrap>
-            {priorities.map(priority => {
-              return (
-                <Option
-                  key={priority}
-                  onClick={() => setPriorityValue(priority, 'priority')}
-                >
-                  {priority}
-                </Option>
-              );
-            })}
-          </OptionsWrap>
-        )}
-      </SelectWrap>
+        <Flexitem>
+          <Label htmlFor="descr">Description</Label>
+          <InputWrap>
+            <TextArea
+              id="descr"
+              value={description}
+              onChange={e =>
+                handleInputChange('description', e.currentTarget.value)
+              }
+            />
+            <DeleteBtn type="button" onClick={() => clearInput('description')}>
+              <DeleteIcon />
+            </DeleteBtn>
+          </InputWrap>
+        </Flexitem>
+
+        <Flexitem>
+          <Label htmlFor="date">Select date</Label>
+          <Calendar setDate={setDate} />
+        </Flexitem>
+
+        <Flexitem>
+          <Label htmlFor="time">Select time</Label>
+          <Time setTime={setTime} />
+        </Flexitem>
+
+        <Flexitem>
+          <Label htmlFor="location">Location</Label>
+          <InputWrap>
+            <Input
+              id="location"
+              type="text"
+              value={location}
+              onChange={e =>
+                handleInputChange('location', e.currentTarget.value)
+              }
+            />
+            <DeleteBtn type="button" onClick={() => clearInput('location')}>
+              <DeleteIcon />
+            </DeleteBtn>
+          </InputWrap>
+        </Flexitem>
+
+        <Flexitem>
+          <FakeLabel>Category</FakeLabel>
+          <SelectWrap>
+            <Select
+              onClick={() => changeOptions('category')}
+              isCategoriesOpen={isCategoriesOpen}
+            >
+              <SelectText category={category}>{category}</SelectText>
+              {isCategoriesOpen ? <SelectIconDown /> : <SelectIconUp />}
+            </Select>
+            {isCategoriesOpen && (
+              <OptionsWrap>
+                {categories.map(category => {
+                  return (
+                    <Option
+                      key={category}
+                      onClick={() => setCategoryValue(category, 'category')}
+                    >
+                      {category}
+                    </Option>
+                  );
+                })}
+              </OptionsWrap>
+            )}
+          </SelectWrap>
+        </Flexitem>
+
+        <Flexitem>
+          <Label htmlFor="picture">
+            Add picture
+            <FileWrap>
+              <InputFIle
+                id="picture"
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                onChange={setPictureValue}
+                ref={fileInputRef}
+              />
+              <Wrap>
+                {picture && <FileText>Picture added</FileText>}
+                <DeleteBtn type="button" onClick={() => clearInput('picture')}>
+                  <DeleteIcon />
+                </DeleteBtn>
+              </Wrap>
+            </FileWrap>
+          </Label>
+          {/* {picture && <img src={picture} alt="picture" />} */}
+        </Flexitem>
+
+        <Flexitem>
+          <FakeLabel>Priority</FakeLabel>
+          <SelectWrap>
+            <Select
+              onClick={() => changeOptions('priority')}
+              isPrioritiesOpen={isPrioritiesOpen}
+            >
+              <SelectText priority={priority}>{priority}</SelectText>
+              {isPrioritiesOpen ? <SelectIconDown /> : <SelectIconUp />}
+            </Select>
+            {isPrioritiesOpen && (
+              <OptionsWrap>
+                {priorities.map(priority => {
+                  return (
+                    <Option
+                      key={priority}
+                      onClick={() => setPriorityValue(priority, 'priority')}
+                    >
+                      {priority}
+                    </Option>
+                  );
+                })}
+              </OptionsWrap>
+            )}
+          </SelectWrap>
+        </Flexitem>
+      </FlexWrap>
 
       <Button type="submit">Add event</Button>
     </Form>

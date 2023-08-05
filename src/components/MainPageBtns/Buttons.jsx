@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useMedia } from 'react-use';
 import PropTypes from 'prop-types';
 import { ReactComponent as Filter1 } from '../../assets/filter1.svg';
 import { ReactComponent as Filter2 } from '../../assets/filter2.svg';
@@ -8,7 +9,10 @@ import {
   Wrap,
   BtnWrap,
   FilterBtn,
+  SortBtn,
+  FilterButtonText,
   PlusBtn,
+  PlusBtnText,
   CategoryFilter,
   FilterList,
   CategoryTitleWrap,
@@ -27,6 +31,10 @@ export const Buttons = ({
 }) => {
   const [isCategoryListOpen, setIsCategoryListOpen] = useState(false);
   const [isFilterListOpen, setIsFilterListOpen] = useState(false);
+  const [category, setCategory] = useState('');
+  const [sortValue, setSortValue] = useState('');
+
+  const tablet = useMedia('(min-width: 768px)', { defaultState: true });
 
   const toggleFilter = value => {
     if (value === 'filter') {
@@ -39,12 +47,16 @@ export const Buttons = ({
   const onFilter = (type, value, query) => {
     if (type === 'name') {
       filterByName(query);
+      setSortValue(`${type} ${query}`);
     } else if (type === 'date') {
       filterByDate(query);
+      setSortValue(`${type} ${query}`);
     } else if (type === 'priority') {
       filterByPriority(query);
+      setSortValue(`${type} ${query}`);
     } else if (type === 'category') {
       filterByCategory(query);
+      setCategory(query);
     }
     toggleFilter(value);
   };
@@ -52,14 +64,30 @@ export const Buttons = ({
   return (
     <Wrap>
       <BtnWrap>
-        <FilterBtn type="button" onClick={() => toggleFilter('category')}>
+        <FilterBtn
+          type="button"
+          onClick={() => toggleFilter('category')}
+          category={category}
+        >
+          {tablet && (
+            <FilterButtonText category={category}>
+              {category ? category : 'Category'}
+            </FilterButtonText>
+          )}
+
           <Filter1 />
         </FilterBtn>
-        <FilterBtn type="button" onClick={() => toggleFilter('filter')}>
-          <Filter2 style={{ stroke: '#3F3F3F' }} />
-        </FilterBtn>
+        <SortBtn
+          type="button"
+          onClick={() => toggleFilter('filter')}
+          sortValue={sortValue}
+        >
+          {tablet && <FilterButtonText>Sort by</FilterButtonText>}
+          <Filter2 />
+        </SortBtn>
         <PlusBtn to="/create">
           <Plus />
+          {tablet && <PlusBtnText>Add new event</PlusBtnText>}
         </PlusBtn>
       </BtnWrap>
       {isCategoryListOpen && (
@@ -69,13 +97,15 @@ export const Buttons = ({
             <CategoryTitle>Category</CategoryTitle>
           </CategoryTitleWrap>
           <ul>
-            {categories.map(category => {
+            {categories.map(categoryItem => {
               return (
                 <CategoryItem
-                  key={category}
-                  onClick={() => onFilter('category', 'category', category)}
+                  key={categoryItem}
+                  onClick={() => onFilter('category', 'category', categoryItem)}
+                  category={category}
+                  categoryValue={categoryItem}
                 >
-                  {category}
+                  {categoryItem}
                 </CategoryItem>
               );
             })}
@@ -86,33 +116,53 @@ export const Buttons = ({
         <FilterList>
           <FilterTitleWrap onClick={() => toggleFilter('filter')}>
             <CategoryTitle>Sort by</CategoryTitle>
-            <Filter2 style={{ stroke: '#7B61FF' }} />
+            <Filter2 />
           </FilterTitleWrap>
           <ul>
-            <FilterItem onClick={() => onFilter('name', 'filter', 'increase')}>
+            <FilterItem
+              onClick={() => onFilter('name', 'filter', 'increase')}
+              sort={sortValue}
+              value={'name increase'}
+            >
               <p>by name</p>
               <ArrowUp />
             </FilterItem>
-            <FilterItem onClick={() => onFilter('name', 'filter', 'decrease')}>
+            <FilterItem
+              onClick={() => onFilter('name', 'filter', 'decrease')}
+              sort={sortValue}
+              value={'name decrease'}
+            >
               <p>by name</p>
               <ArrowUp />
             </FilterItem>
-            <FilterItem onClick={() => onFilter('date', 'filter', 'increase')}>
+            <FilterItem
+              onClick={() => onFilter('date', 'filter', 'increase')}
+              sort={sortValue}
+              value={'date increase'}
+            >
               <p>by date</p>
               <ArrowUp />
             </FilterItem>
-            <FilterItem onClick={() => onFilter('date', 'filter', 'decrease')}>
+            <FilterItem
+              onClick={() => onFilter('date', 'filter', 'decrease')}
+              sort={sortValue}
+              value={'date decrease'}
+            >
               <p>by date</p>
               <ArrowUp />
             </FilterItem>
             <FilterItem
               onClick={() => onFilter('priority', 'filter', 'increase')}
+              sort={sortValue}
+              value={'priority increase'}
             >
               <p>by priority</p>
               <ArrowUp />
             </FilterItem>
             <FilterItem
               onClick={() => onFilter('priority', 'filter', 'decrease')}
+              sort={sortValue}
+              value={'priority decrease'}
             >
               <p>by priority</p>
               <ArrowUp />

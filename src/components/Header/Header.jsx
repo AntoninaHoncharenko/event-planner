@@ -34,18 +34,18 @@ export const Header = () => {
               <ArrowIcon />
             </LangBtn>
           </LangSwitch>
+          <InputWrap>
+            <Label htmlFor="query">
+              <SearchIcon />
+            </Label>
+            <Input
+              type="text"
+              id="query"
+              placeholder="Search by keywords"
+              onChange={handleInputChange}
+            />
+          </InputWrap>
         </Wrap>
-        <InputWrap>
-          <Label htmlFor="query">
-            <SearchIcon />
-          </Label>
-          <Input
-            type="text"
-            id="query"
-            placeholder="Search by keywords"
-            onChange={handleInputChange}
-          />
-        </InputWrap>
       </MainContainer>
     </HeaderWrap>
   );
