@@ -29,9 +29,18 @@ import {
 import { ReactComponent as SelectIconUp } from '../../assets/arrow-select.svg';
 import { ReactComponent as SelectIconDown } from '../../assets/arrow-select1.svg';
 import { ReactComponent as DeleteIcon } from '../../assets/close-input.svg';
-import { categories, priorities } from '../../data';
+import { categories, priorities } from '../../helpers/data';
 import { Calendar } from './DatePicker/DatePicker';
 import { Time } from './TimePicker/TimePicker';
+import { nanoid } from 'nanoid';
+import { storage } from '../../helpers/firebase';
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from 'firebase/storage';
 
 export const EventForm = () => {
   const [title, setTitle] = useState('');
@@ -96,15 +105,13 @@ export const EventForm = () => {
   };
 
   const setPictureValue = event => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.addEventListener('load', event => {
-      const buffer = event.target.result;
-      const blob = new Blob([buffer], { type: file.type });
-      const url = URL.createObjectURL(blob);
-      setPicture(url);
+    const image = event.target.files[0];
+    const imageRef = ref(storage, `images/${image.name + nanoid()}`);
+    uploadBytes(imageRef, image).then(snapshot => {
+      getDownloadURL(snapshot.ref).then(url => {
+        setPicture(prev => [...prev, url]);
+      });
     });
-    reader.readAsArrayBuffer(file);
   };
 
   // validation

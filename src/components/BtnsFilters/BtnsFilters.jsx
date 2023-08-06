@@ -21,7 +21,7 @@ import {
   CategoryItem,
   FilterItem,
 } from './BtnsFilters.styled';
-import { categories } from '../../data';
+import { categories } from '../../helpers/data';
 
 export const BtnsFilters = ({
   filterByName,
