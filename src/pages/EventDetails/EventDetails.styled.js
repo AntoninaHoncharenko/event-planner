@@ -1,10 +1,20 @@
 import styled from 'styled-components';
 
 export const Main = styled.main`
-  width: 100vw;
-  height: 100vh;
-  background-image: url(src/assets/bg-mob.png);
+  /* width: 100vw;
+  height: 100vh; */
+  background-image: url(src/assets/bg-mob1.png);
   background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+
+  @media (min-width: 768px) {
+    background-image: url(src/assets/bg-tablet-det.png);
+  }
+
+  @media (min-width: 1440px) {
+    background-image: url(src/assets/bg-desk-det.png);
+  }
 `;
 
 export const Section = styled.section`

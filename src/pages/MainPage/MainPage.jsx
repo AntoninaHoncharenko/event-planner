@@ -6,15 +6,15 @@ import { getAllEvents } from '../../redux/operation';
 import { Main, Section, Wrap, Title } from './MainPage.styled';
 import { MainContainer } from '../../components/Container/Container';
 import { EventList } from '../../components/EventList/EventList';
-import { Pagination } from '../../components/Pagination/Pagination';
+// import { Pagination } from '../../components/Pagination/Pagination';
 import { BtnsFilters } from '../../components/BtnsFilters/BtnsFilters';
 import { PageTitle } from '../../components/Title/Title';
 
 const MainPage = () => {
   const [events, setEvents] = useState([]);
 
-  const tablet = useMedia('(min-width: 768px, max-width: 1339px,)', {
-    defaultState: true,
+  const tablet = useMedia('(min-width: 768px) and (max-width: 1339px)', {
+    defaultMatches: true,
   });
   const desk = useMedia('(min-width: 1440px)', { defaultState: true });
 

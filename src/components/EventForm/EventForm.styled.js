@@ -297,7 +297,7 @@ export const OptionsWrap = styled.ul`
   }
 `;
 
-export const Option = styled.li`
+export const CategoryOption = styled.li`
   width: 100%;
   height: 56px;
   padding: 16px 0;
@@ -306,7 +306,33 @@ export const Option = styled.li`
     border-bottom: 1px solid ${colors.divider};
   }
 
-  color: ${colors.text};
+  color: ${props => (props.category === props.value ? '#7B61FF' : '#3F3F3F')};
   font-size: 16px;
   line-height: normal;
+  transition: 300ms linear;
+  cursor: pointer;
+
+  &:hover {
+    color: ${colors.accent};
+  }
+`;
+
+export const PriorityOption = styled.li`
+  width: 100%;
+  height: 56px;
+  padding: 16px 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid ${colors.divider};
+  }
+
+  color: ${props => (props.priority === props.value ? '#7B61FF' : '#3F3F3F')};
+  font-size: 16px;
+  line-height: normal;
+  transition: 300ms linear;
+  cursor: pointer;
+
+  &:hover {
+    color: ${colors.accent};
+  }
 `;

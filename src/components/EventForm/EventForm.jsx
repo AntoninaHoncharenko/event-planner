@@ -14,7 +14,8 @@ import {
   Select,
   SelectText,
   OptionsWrap,
-  Option,
+  CategoryOption,
+  PriorityOption,
   InputFIle,
   FileWrap,
   Wrap,
@@ -192,14 +193,16 @@ export const EventForm = () => {
             </Select>
             {isCategoriesOpen && (
               <OptionsWrap>
-                {categories.map(category => {
+                {categories.map(categoryItem => {
                   return (
-                    <Option
-                      key={category}
-                      onClick={() => setCategoryValue(category, 'category')}
+                    <CategoryOption
+                      key={categoryItem}
+                      onClick={() => setCategoryValue(categoryItem, 'category')}
+                      category={category}
+                      value={categoryItem}
                     >
-                      {category}
-                    </Option>
+                      {categoryItem}
+                    </CategoryOption>
                   );
                 })}
               </OptionsWrap>
@@ -241,14 +244,16 @@ export const EventForm = () => {
             </Select>
             {isPrioritiesOpen && (
               <OptionsWrap>
-                {priorities.map(priority => {
+                {priorities.map(priorityItem => {
                   return (
-                    <Option
-                      key={priority}
-                      onClick={() => setPriorityValue(priority, 'priority')}
+                    <PriorityOption
+                      key={priorityItem}
+                      onClick={() => setPriorityValue(priorityItem, 'priority')}
+                      priority={priority}
+                      value={priorityItem}
                     >
-                      {priority}
-                    </Option>
+                      {priorityItem}
+                    </PriorityOption>
                   );
                 })}
               </OptionsWrap>

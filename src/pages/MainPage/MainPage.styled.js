@@ -2,10 +2,20 @@ import styled from 'styled-components';
 import { colors } from '../../vars';
 
 export const Main = styled.main`
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw;
+  height: 100vh; */
   background-image: url(src/assets/bg-mob.png);
   background-repeat: no-repeat;
+  background-size: cover;
+
+  @media (min-width: 768px) {
+    background-image: url(src/assets/bg-tablet.png);
+  }
+
+  @media (min-width: 1440px) {
+    height: 1349px;
+    background-image: url(src/assets/bg-desk.png);
+  }
 `;
 
 export const Section = styled.section`
