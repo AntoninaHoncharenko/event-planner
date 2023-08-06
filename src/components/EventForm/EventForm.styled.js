@@ -90,6 +90,10 @@ export const DeleteBtn = styled.button`
   @media (min-width: 1440px) {
     left: 336px;
   }
+
+  svg {
+    stroke: ${props => (props.errorValue ? '#FF2B77' : '#7B61FF')};
+  }
 `;
 
 export const Input = styled.input`
@@ -101,6 +105,7 @@ export const Input = styled.input`
   outline: none;
 
   color: ${colors.text};
+  border-color: ${props => (props.errorValue ? '#FF2B77' : '#ACA7C3')};
   font-size: 16px;
   line-height: 1.5;
 
@@ -335,4 +340,12 @@ export const PriorityOption = styled.li`
   &:hover {
     color: ${colors.accent};
   }
+`;
+
+export const Error = styled.p`
+  width: 75px;
+  color: ${colors.high};
+  font-size: 12px;
+  line-height: 1.33;
+  margin: 4px 19px 0 auto;
 `;

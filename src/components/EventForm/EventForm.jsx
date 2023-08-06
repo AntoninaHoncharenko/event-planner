@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { nanoid } from 'nanoid';
+import * as yup from 'yup';
 import {
   Form,
   FlexWrap,
@@ -21,6 +23,7 @@ import {
   Wrap,
   FileText,
   Button,
+  Error,
 } from './EventForm.styled';
 import { ReactComponent as SelectIconUp } from '../../assets/arrow-select.svg';
 import { ReactComponent as SelectIconDown } from '../../assets/arrow-select1.svg';
@@ -47,10 +50,12 @@ export const EventForm = () => {
   const clearInput = name => {
     if (name === 'title') {
       setTitle('');
+      updateErrors('title');
     } else if (name === 'description') {
       setDescription('');
     } else if (name === 'location') {
       setLocation('');
+      updateErrors('location');
     } else if (name === 'picture') {
       fileInputRef.current.value = '';
       setPicture(null);
@@ -101,6 +106,23 @@ export const EventForm = () => {
     reader.readAsArrayBuffer(file);
   };
 
+  // validation
+  const [errors, setErrors] = useState({});
+  const updateErrors = value => {
+    setErrors(prevState => ({ ...prevState, [value]: '' }));
+  };
+
+  const initialValues = {
+    title,
+    location,
+  };
+
+  const schema = yup.object().shape({
+    title: yup.string().matches(/^[a-zA-Z\s]+$/),
+    location: yup.string().matches(/^[a-zA-Z\s]+$/),
+  });
+
+  // get data and submit
   const formData = new FormData();
 
   formData.append('title', title);
@@ -113,11 +135,26 @@ export const EventForm = () => {
   formData.append('priority', priority);
   formData.append('id', nanoid());
 
+  const navigate = useNavigate();
+
   const onFormSubmit = e => {
     e.preventDefault();
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
+    schema
+      .validate(initialValues, { abortEarly: false })
+      .then(() => {
+        for (const [key, value] of formData.entries()) {
+          console.log(`${key}: ${value}`);
+          navigate('/', { replace: true });
+        }
+      })
+      .catch(err => {
+        const errors = err.inner.reduce(
+          (acc, curr) => ({ ...acc, [curr.path]: curr.message }),
+          {}
+        );
+        setErrors(errors);
+        console.log(errors);
+      });
   };
 
   return (
@@ -131,11 +168,17 @@ export const EventForm = () => {
               type="text"
               value={title}
               onChange={e => handleInputChange('title', e.currentTarget.value)}
+              errorValue={errors.title}
             />
-            <DeleteBtn type="button" onClick={() => clearInput('title')}>
+            <DeleteBtn
+              type="button"
+              onClick={() => clearInput('title')}
+              errorValue={errors.title}
+            >
               <DeleteIcon />
             </DeleteBtn>
           </InputWrap>
+          {errors.title && <Error>Invalid input</Error>}
         </Flexitem>
 
         <Flexitem>
@@ -174,11 +217,17 @@ export const EventForm = () => {
               onChange={e =>
                 handleInputChange('location', e.currentTarget.value)
               }
+              errorValue={errors.location}
             />
-            <DeleteBtn type="button" onClick={() => clearInput('location')}>
+            <DeleteBtn
+              type="button"
+              onClick={() => clearInput('location')}
+              errorValue={errors.location}
+            >
               <DeleteIcon />
             </DeleteBtn>
           </InputWrap>
+          {errors.location && <Error>Invalid input</Error>}
         </Flexitem>
 
         <Flexitem>
