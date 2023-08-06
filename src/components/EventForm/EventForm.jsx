@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { nanoid } from 'nanoid';
+import { useDispatch } from 'react-redux';
+import { addEvent } from '../../redux/operation';
 import * as yup from 'yup';
 import {
   Form,
@@ -36,7 +37,7 @@ export const EventForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
-  const [picture, setPicture] = useState(null);
+  const [picture, setPicture] = useState('');
   const [category, setCategory] = useState('Select category');
   const [priority, setPriority] = useState('Select priority');
   const [date, setDate] = useState(null);
@@ -123,29 +124,35 @@ export const EventForm = () => {
   });
 
   // get data and submit
-  const formData = new FormData();
+  const data = {
+    title,
+    description,
+    location,
+    date,
+    time,
+    category: category === 'Select category' ? '' : category,
+    priority: priority === 'Select priority' ? '' : priority,
+    picture,
+  };
 
-  formData.append('title', title);
-  formData.append('description', description);
-  formData.append('picture', picture);
-  formData.append('location', location);
-  formData.append('date', date);
-  formData.append('time', time);
-  formData.append('category', category);
-  formData.append('priority', priority);
-  formData.append('id', nanoid());
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onFormSubmit = e => {
     e.preventDefault();
+
     schema
       .validate(initialValues, { abortEarly: false })
       .then(() => {
-        for (const [key, value] of formData.entries()) {
-          console.log(`${key}: ${value}`);
-          navigate('/', { replace: true });
-        }
+        dispatch(addEvent(data))
+          .unwrap()
+          .then(responseData => {
+            const eventId = responseData.id;
+            navigate(`/${eventId}`, { replace: true });
+          })
+          .catch(error => {
+            console.log(error);
+          });
       })
       .catch(err => {
         const errors = err.inner.reduce(

@@ -101,7 +101,6 @@ export const EventDate = styled.p`
   width: 139px;
   height: 32px;
   padding: 4px 10px;
-  margin-bottom: 40px;
   border-radius: 8px;
   background-color: ${colors.white};
   box-shadow: 4px 5px 9px 0px rgba(166, 141, 174, 0.28);
@@ -121,10 +120,12 @@ export const BtnWrap = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-top: 40px;
 
   @media (min-width: 768px) {
     width: 179px;
     margin-left: auto;
+    margin-top: 0;
   }
 `;
 

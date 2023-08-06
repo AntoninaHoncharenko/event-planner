@@ -19,10 +19,13 @@ import {
   EditBtn,
   DeleteBtn,
 } from './EventCard.styled';
+import DefaultImgS from '../../assets/default-small.png';
+import DefaultImgL from '../../assets/default-big.png';
 
 export const EventCard = () => {
   const { eventId } = useParams();
 
+  const mobile = useMedia('(max-width: 767px)', { defaultState: true });
   const tablet = useMedia('(min-width: 768px)', { defaultState: true });
   const desk = useMedia('(min-width: 1440px)', { defaultState: false });
 
@@ -46,14 +49,17 @@ export const EventCard = () => {
       {!desk && <PageTitle>{event.title}</PageTitle>}
       {desk && <Title>{event.title}</Title>}
       <Card>
-        <Image src={event.picture} alt="image" />
+        {mobile && <Image src={event.picture || DefaultImgS} alt="image" />}
+        {tablet && <Image src={event.picture || DefaultImgL} alt="image" />}
         <InfoWrap>
           <Text>{event.description}</Text>
           <MarksWrap>
-            <Mark>{event.category}</Mark>
-            <Mark priority={event.priority}>{event.priority}</Mark>
+            {event.category && <Mark>{event.category}</Mark>}
+            {event.priority && (
+              <Mark priority={event.priority}>{event.priority}</Mark>
+            )}
             <Mark>{event.location}</Mark>
-            {tablet && (
+            {tablet && (event.date || event.time) && (
               <EventDate>
                 {event.date && (
                   <span>{format(new Date(event.date), 'd.MM')} </span>
@@ -63,7 +69,7 @@ export const EventCard = () => {
               </EventDate>
             )}
           </MarksWrap>
-          {!tablet && (
+          {!tablet && (event.date || event.time) && (
             <EventDate>
               {event.date && (
                 <span>{format(new Date(event.date), 'd.MM')} </span>

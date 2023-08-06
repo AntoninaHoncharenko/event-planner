@@ -16,6 +16,7 @@ import {
   MoreBtn,
 } from './EventList.styled';
 import { format } from 'date-fns';
+import DefaultImg from '../../assets/default-small.png';
 
 export const EventList = ({ events }) => {
   return (
@@ -24,17 +25,28 @@ export const EventList = ({ events }) => {
         return (
           <Card key={event.id}>
             <ImgThumb>
-              <Image src={event.picture} alt="image" />
+              <Image src={event.picture || DefaultImg} alt="image" />
               <MarksWrap>
-                <Category>{event.category}</Category>
-                <Priority priority={event.priority}>{event.priority}</Priority>
+                {event.category && <Category>{event.category}</Category>}
+                {event.priority && (
+                  <Priority priority={event.priority}>
+                    {event.priority}
+                  </Priority>
+                )}
               </MarksWrap>
               <Overlay>
                 <DetailsWrap>
                   <p>
-                    <span>{format(new Date(event.date), 'd.MM')} </span>
-                    at
-                    <span> {event.time}</span>
+                    {event.date && (
+                      <span>{format(new Date(event.date), 'd.MM')} </span>
+                    )}
+
+                    {event.time && (
+                      <>
+                        <span>at</span>
+                        <span> {event.time && event.time.slice(0, -3)}</span>
+                      </>
+                    )}
                   </p>
                   <p>{event.location}</p>
                 </DetailsWrap>
