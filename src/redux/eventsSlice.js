@@ -59,7 +59,7 @@ const updateEventReducer = (state, action) => {
 
 const deleteEventReducer = (state, action) => {
   const index = state.events.findIndex(event => event.id === action.payload.id);
-  state.contacts.splice(index, 1);
+  state.events.splice(index, 1);
 };
 
 export const eventsSlice = createSlice({

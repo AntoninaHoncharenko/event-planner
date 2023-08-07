@@ -69,6 +69,8 @@ export const Edit = () => {
   const [date, setDate] = useState();
   const [time, setTime] = useState();
 
+  console.log(picture);
+
   const fileInputRef = useRef(null);
 
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
@@ -126,7 +128,7 @@ export const Edit = () => {
     const imageRef = ref(storage, `images/${image.name + nanoid()}`);
     uploadBytes(imageRef, image).then(snapshot => {
       getDownloadURL(snapshot.ref).then(url => {
-        setPicture(prev => [...prev, url]);
+        setPicture(url);
       });
     });
   };
