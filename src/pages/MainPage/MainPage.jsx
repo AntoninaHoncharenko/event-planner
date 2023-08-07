@@ -6,7 +6,6 @@ import { getAllEvents } from '../../redux/operation';
 import { Main, Section, Wrap, Title } from './MainPage.styled';
 import { MainContainer } from '../../components/Container/Container';
 import { EventList } from '../../components/EventList/EventList';
-// import { Pagination } from '../../components/Pagination/Pagination';
 import { BtnsFilters } from '../../components/BtnsFilters/BtnsFilters';
 import { PageTitle } from '../../components/Title/Title';
 
@@ -101,7 +100,6 @@ const MainPage = () => {
           </Wrap>
           {tablet && <PageTitle>My events</PageTitle>}
           <EventList events={events} />
-          {/* <Pagination /> */}
         </MainContainer>
       </Section>
     </Main>

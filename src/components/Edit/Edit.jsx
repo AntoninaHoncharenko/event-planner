@@ -69,8 +69,6 @@ export const Edit = () => {
   const [date, setDate] = useState();
   const [time, setTime] = useState();
 
-  console.log(picture);
-
   const fileInputRef = useRef(null);
 
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
