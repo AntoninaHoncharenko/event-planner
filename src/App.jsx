@@ -6,6 +6,7 @@ import { GlobalStyle } from './GlobalStyles';
 const MainPage = lazy(() => import('./pages/MainPage/MainPage'));
 const CreateEvent = lazy(() => import('./pages/CreateEvent/CreateEvent'));
 const EventDetails = lazy(() => import('./pages/EventDetails/EventDetails'));
+const EditEvent = lazy(() => import('./pages/EditEvent/EditEvent'));
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<MainPage />}></Route>
           <Route path="/create" element={<CreateEvent />} />
-          <Route path="/:eventId" element={<EventDetails />} />
+          <Route path="/:eventId" element={<EventDetails />}></Route>
+          <Route path="/:eventId/edit" element={<EditEvent />} />
         </Route>
       </Routes>
 

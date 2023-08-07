@@ -79,7 +79,7 @@ export const EventCard = () => {
             </EventDate>
           )}
           <BtnWrap>
-            <EditBtn>Edit</EditBtn>
+            <EditBtn to={`/${eventId}/edit`}>Edit</EditBtn>
             <DeleteBtn onClick={handleDelete}>Delete event</DeleteBtn>
           </BtnWrap>
         </InfoWrap>

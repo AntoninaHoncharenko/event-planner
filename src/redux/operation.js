@@ -39,6 +39,18 @@ export const addEvent = createAsyncThunk(
   }
 );
 
+export const updateEvent = createAsyncThunk(
+  'events/updateEvent',
+  async ({ id, event }, thunkAPI) => {
+    try {
+      const response = await axios.put(`/events/${id}`, event);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const deleteEvent = createAsyncThunk(
   'events/deleteEvent',
   async (eventId, thunkAPI) => {

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { colors } from '../../vars';
+import { Link } from 'react-router-dom';
 
 export const Title = styled.h2`
   color: ${colors.text};
@@ -129,7 +130,7 @@ export const BtnWrap = styled.div`
   }
 `;
 
-export const EditBtn = styled.button`
+export const EditBtn = styled(Link)`
   width: 108px;
   height: 32px;
   padding: 8px 16px;

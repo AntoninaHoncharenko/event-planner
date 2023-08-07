@@ -1,7 +1,9 @@
-import { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addEvent } from '../../redux/operation';
+import { useState, useRef, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectOneEvent } from '../../redux/selectors';
+import { getOneEvent } from '../../redux/operation';
+import { updateEvent } from '../../redux/operation';
 import * as yup from 'yup';
 import {
   Form,
@@ -25,26 +27,47 @@ import {
   FileText,
   Button,
   Error,
-} from './EventForm.styled';
+} from './Edit.styled';
 import { ReactComponent as SelectIconUp } from '../../assets/arrow-select.svg';
 import { ReactComponent as SelectIconDown } from '../../assets/arrow-select1.svg';
 import { ReactComponent as DeleteIcon } from '../../assets/close-input.svg';
 import { categories, priorities } from '../../helpers/data';
-import { Calendar } from './DatePicker/DatePicker';
-import { Time } from './TimePicker/TimePicker';
+import { Calendar } from '../EventForm/DatePicker/DatePicker';
+import { Time } from '../EventForm/TimePicker/TimePicker';
 import { nanoid } from 'nanoid';
 import { storage } from '../../helpers/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-export const EventForm = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [location, setLocation] = useState('');
-  const [picture, setPicture] = useState('');
-  const [category, setCategory] = useState('Select category');
-  const [priority, setPriority] = useState('Select priority');
-  const [date, setDate] = useState(null);
-  const [time, setTime] = useState(null);
+export const Edit = () => {
+  const { eventId } = useParams();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOneEvent(eventId));
+  }, [dispatch, eventId]);
+
+  const event = useSelector(selectOneEvent);
+
+  useEffect(() => {
+    setTitle(event.title);
+    setDescription(event.description);
+    setLocation(event.location);
+    setPicture(event.picture);
+    setCategory(event.category);
+    setPriority(event.priority);
+    setDate(event.date);
+    setTime(event.time);
+  }, [event]);
+
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
+  const [location, setLocation] = useState();
+  const [picture, setPicture] = useState();
+  const [category, setCategory] = useState();
+  const [priority, setPriority] = useState();
+  const [date, setDate] = useState();
+  const [time, setTime] = useState();
 
   const fileInputRef = useRef(null);
 
@@ -136,7 +159,6 @@ export const EventForm = () => {
     picture,
   };
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onFormSubmit = e => {
@@ -145,7 +167,7 @@ export const EventForm = () => {
     schema
       .validate(initialValues, { abortEarly: false })
       .then(() => {
-        dispatch(addEvent(data))
+        dispatch(updateEvent({ id: eventId, event: data }))
           .unwrap()
           .then(responseData => {
             const eventId = responseData.id;
@@ -207,12 +229,12 @@ export const EventForm = () => {
 
         <Flexitem>
           <Label htmlFor="date">Select date</Label>
-          <Calendar setDate={setDate} />
+          <Calendar setDate={setDate} dateValue={event.date} />
         </Flexitem>
 
         <Flexitem>
           <Label htmlFor="time">Select time</Label>
-          <Time setTime={setTime} />
+          <Time setTime={setTime} time={time} />
         </Flexitem>
 
         <Flexitem>
@@ -318,7 +340,7 @@ export const EventForm = () => {
         </Flexitem>
       </FlexWrap>
 
-      <Button type="submit">Add event</Button>
+      <Button type="submit">Save</Button>
     </Form>
   );
 };

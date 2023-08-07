@@ -1,5 +1,11 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getAllEvents, getOneEvent, addEvent, deleteEvent } from './operation';
+import {
+  getAllEvents,
+  getOneEvent,
+  addEvent,
+  deleteEvent,
+  updateEvent,
+} from './operation';
 
 const initialState = {
   events: [],
@@ -8,7 +14,13 @@ const initialState = {
   error: null,
 };
 
-const extaActions = [getAllEvents, getOneEvent, addEvent, deleteEvent];
+const extaActions = [
+  getAllEvents,
+  getOneEvent,
+  addEvent,
+  deleteEvent,
+  updateEvent,
+];
 const getActions = type => extaActions.map(action => action[type]);
 
 const fulfilledReducer = state => {
@@ -37,6 +49,14 @@ const addEventReducer = (state, action) => {
   state.events.push(action.payload);
 };
 
+const updateEventReducer = (state, action) => {
+  const updatedEvent = action.payload;
+  const index = state.events.findIndex(event => event.id === updatedEvent.id);
+  if (index !== -1) {
+    state.events[index] = updatedEvent;
+  }
+};
+
 const deleteEventReducer = (state, action) => {
   const index = state.events.findIndex(event => event.id === action.payload.id);
   state.contacts.splice(index, 1);
@@ -51,6 +71,7 @@ export const eventsSlice = createSlice({
       .addCase(getOneEvent.fulfilled, getOneEventReducer)
       .addCase(addEvent.fulfilled, addEventReducer)
       .addCase(deleteEvent.fulfilled, deleteEventReducer)
+      .addCase(updateEvent.fulfilled, updateEventReducer)
       .addMatcher(isAnyOf(...getActions('pending')), pendingReducer)
       .addMatcher(isAnyOf(...getActions('rejected')), rejectedReducer)
       .addMatcher(isAnyOf(...getActions('fulfilled')), fulfilledReducer);
