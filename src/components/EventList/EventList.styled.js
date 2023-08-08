@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../vars';
+import { colors } from '../../helpers/vars';
 
 export const List = styled.ul`
   margin-bottom: 40px;

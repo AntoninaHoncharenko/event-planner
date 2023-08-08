@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../vars';
+import { colors } from '../../helpers/vars';
 import { Link } from 'react-router-dom';
 
 export const Wrap = styled.div`

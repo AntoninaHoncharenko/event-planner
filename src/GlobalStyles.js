@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import 'modern-normalize';
-import { colors } from './vars';
+import { colors } from './helpers/vars';
 
 export const GlobalStyle = createGlobalStyle`
 body {

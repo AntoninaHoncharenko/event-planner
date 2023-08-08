@@ -3,8 +3,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Select, SelectText } from './DatePicker.styled';
-import { ReactComponent as SelectIconDown } from '../../../assets/arrow-select.svg';
-import { ReactComponent as SelectIconUp } from '../../../assets/arrow-select1.svg';
+import { ReactComponent as SelectIconDown } from '../../assets/arrow-select.svg';
+import { ReactComponent as SelectIconUp } from '../../assets/arrow-select1.svg';
 import format from 'date-fns/format';
 
 const CustomInput = forwardRef(

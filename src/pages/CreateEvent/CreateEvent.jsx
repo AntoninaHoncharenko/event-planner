@@ -2,7 +2,7 @@ import { MainContainer } from '../../components/Container/Container';
 import { BackLink } from '../../components/BackLink/BackLink';
 import { PageTitle } from '../../components/Title/Title';
 import { Main, Section } from './CreateEvent.styled';
-import { EventForm } from '../../components/EventForm/EventForm';
+import { AddForm } from '../../components/AddForm/AddForm';
 
 const CreateEvent = () => {
   return (
@@ -11,7 +11,7 @@ const CreateEvent = () => {
         <MainContainer>
           <BackLink />
           <PageTitle>Create new event</PageTitle>
-          <EventForm />
+          <AddForm />
         </MainContainer>
       </Section>
     </Main>

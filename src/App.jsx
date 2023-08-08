@@ -19,7 +19,6 @@ function App() {
           <Route path="/:eventId/edit" element={<EditEvent />} />
         </Route>
       </Routes>
-
       <GlobalStyle />
     </>
   );

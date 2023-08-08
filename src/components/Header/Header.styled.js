@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../vars';
+import { colors } from '../../helpers/vars';
 
 export const HeaderWrap = styled.header`
   padding: 32px 0 24px;

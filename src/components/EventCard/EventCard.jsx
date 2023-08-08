@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useMedia } from 'react-use';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectOneEvent } from '../../redux/selectors';
+import { selectOneEvent, selectLoading } from '../../redux/selectors';
 import { getOneEvent, deleteEvent } from '../../redux/operation';
 import { PageTitle } from '../../components/Title/Title';
 import { format } from 'date-fns';
@@ -21,6 +21,7 @@ import {
 } from './EventCard.styled';
 import DefaultImgS from '../../assets/default-small.png';
 import DefaultImgL from '../../assets/default-big.png';
+import { Loader } from '../Loader/Loader';
 
 export const EventCard = () => {
   const { eventId } = useParams();
@@ -36,6 +37,7 @@ export const EventCard = () => {
   }, [dispatch, eventId]);
 
   const event = useSelector(selectOneEvent);
+  const isLoading = useSelector(selectLoading);
 
   const navigate = useNavigate();
 
@@ -46,6 +48,7 @@ export const EventCard = () => {
 
   return (
     <>
+      {isLoading && <Loader />}
       {!desk && <PageTitle>{event.title}</PageTitle>}
       {desk && <Title>{event.title}</Title>}
       <Card>

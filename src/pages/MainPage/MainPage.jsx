@@ -1,13 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useMedia } from 'react-use';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectEvents, selectFilter } from '../../redux/selectors';
+import {
+  selectEvents,
+  selectFilter,
+  selectLoading,
+} from '../../redux/selectors';
 import { getAllEvents } from '../../redux/operation';
 import { Main, Section, Wrap, Title } from './MainPage.styled';
 import { MainContainer } from '../../components/Container/Container';
 import { EventList } from '../../components/EventList/EventList';
 import { BtnsFilters } from '../../components/BtnsFilters/BtnsFilters';
 import { PageTitle } from '../../components/Title/Title';
+import { Loader } from '../../components/Loader/Loader';
 
 const MainPage = () => {
   const [events, setEvents] = useState([]);
@@ -20,6 +25,7 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const allEvents = useSelector(selectEvents);
   const filter = useSelector(selectFilter);
+  const isLoading = useSelector(selectLoading);
 
   useEffect(() => {
     dispatch(getAllEvents());
@@ -102,6 +108,7 @@ const MainPage = () => {
           <EventList events={events} />
         </MainContainer>
       </Section>
+      {isLoading && <Loader />}
     </Main>
   );
 };

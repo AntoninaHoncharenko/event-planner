@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Space, TimePicker } from 'antd';
 import PropTypes from 'prop-types';
 import { useMedia } from 'react-use';
-import { ReactComponent as SelectIconUp } from '../../../assets/arrow-select1.svg';
-import { ReactComponent as SelectIconDown } from '../../../assets/arrow-select.svg';
+import { ReactComponent as SelectIconUp } from '../../assets/arrow-select1.svg';
+import { ReactComponent as SelectIconDown } from '../../assets/arrow-select.svg';
 
 export const Time = ({ setTime, time }) => {
   const [isPickerOpen, setIsPickerOpen] = useState(false);

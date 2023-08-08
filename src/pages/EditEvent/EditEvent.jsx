@@ -1,4 +1,4 @@
-import { Edit } from '../../components/Edit/Edit';
+import { EditForm } from '../../components/EditForm/EditForm';
 import { MainContainer } from '../../components/Container/Container';
 import { PageTitle } from '../../components/Title/Title';
 import { Main, Section, BackLink, BackText } from './EditEvent.styled';
@@ -17,7 +17,7 @@ const EditEvent = () => {
             <BackText>Back</BackText>
           </BackLink>
           <PageTitle>Edit event</PageTitle>
-          <Edit />
+          <EditForm />
         </MainContainer>
       </Section>
     </Main>
