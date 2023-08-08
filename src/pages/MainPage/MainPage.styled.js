@@ -1,18 +1,21 @@
 import styled from 'styled-components';
 import { colors } from '../../helpers/vars';
+import BgMob from '../../assets/bg-mob.png';
+import BgTab from '../../assets/bg-tablet.png';
+import BgDesk from '../../assets/bg-desk.png';
 
 export const Main = styled.main`
-  background-image: url(/src/assets/bg-mob.png);
+  background-image: url(${BgMob});
   background-repeat: no-repeat;
   background-size: cover;
 
   @media (min-width: 768px) {
-    background-image: url(/src/assets/bg-tablet.png);
+    background-image: url(${BgTab});
   }
 
   @media (min-width: 1440px) {
     height: 1349px;
-    background-image: url(/src/assets/bg-desk.png);
+    background-image: url(${BgDesk});
   }
 `;
 
