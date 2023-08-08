@@ -3,8 +3,6 @@ import { colors } from '../../helpers/vars';
 import { Link } from 'react-router-dom';
 
 export const Main = styled.main`
-  /* width: 100vw;
-  height: 100vh; */
   background-image: url(src/assets/bg-mob.png);
   background-repeat: no-repeat;
   background-position: top center;

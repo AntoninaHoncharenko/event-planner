@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const Main = styled.main`
-  width: 100vw;
-  height: 100vh;
   background-image: url(src/assets/bg-mob1.png);
   background-repeat: no-repeat;
   background-position: top center;
