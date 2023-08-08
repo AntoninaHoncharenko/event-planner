@@ -1,19 +1,22 @@
 import styled from 'styled-components';
 import { colors } from '../../helpers/vars';
 import { Link } from 'react-router-dom';
+import BgMob from '../../assets/bg-mob.png';
+import BgTab from '../../assets/bg-tablet-add.png';
+import BgDesk from '../../assets/bg-desk-det.png';
 
 export const Main = styled.main`
-  background-image: url(src/assets/bg-mob.png);
+  background-image: url(${BgMob});
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
 
   @media (min-width: 768px) {
-    background-image: url(src/assets/bg-tablet-add.png);
+    background-image: url(${BgTab});
   }
 
   @media (min-width: 1440px) {
-    background-image: url(src/assets/bg-desk-det.png);
+    background-image: url(${BgDesk});
   }
 `;
 
