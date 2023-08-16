@@ -1,5 +1,7 @@
 import { nanoid } from 'nanoid';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import toast from 'react-hot-toast';
+
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -172,6 +174,7 @@ export const EditForm = () => {
           .then(responseData => {
             const eventId = responseData.id;
             navigate(`/${eventId}`, { replace: true });
+            toast.success('Event is successfully edited');
           })
           .catch(error => {
             console.log(error);

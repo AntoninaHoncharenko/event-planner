@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
 import { SharedLayout } from './components/Layout/Layout';
+import { Toaster } from 'react-hot-toast';
 import { GlobalStyle } from './GlobalStyles';
 
 const MainPage = lazy(() => import('./pages/MainPage/MainPage'));
@@ -19,6 +20,7 @@ function App() {
           <Route path="/:eventId/edit" element={<EditEvent />} />
         </Route>
       </Routes>
+      <Toaster containerStyle={{ width: '280px', margin: '0 auto' }} />
       <GlobalStyle />
     </>
   );

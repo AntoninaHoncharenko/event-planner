@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import toast from 'react-hot-toast';
 
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -153,6 +154,7 @@ export const AddForm = () => {
           .then(responseData => {
             const eventId = responseData.id;
             navigate(`/${eventId}`, { replace: true });
+            toast.success('Event is successfully added');
           })
           .catch(error => {
             console.log(error);

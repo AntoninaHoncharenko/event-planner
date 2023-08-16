@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { useMedia } from 'react-use';
+import toast from 'react-hot-toast';
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -44,8 +45,12 @@ export const EventCard = () => {
   const navigate = useNavigate();
 
   const handleDelete = () => {
-    dispatch(deleteEvent(eventId));
-    navigate('/', { replace: true });
+    dispatch(deleteEvent(eventId))
+      .unwrap()
+      .then(() => {
+        navigate('/', { replace: true });
+        toast.success('Event is successfully deleted');
+      });
   };
 
   return (

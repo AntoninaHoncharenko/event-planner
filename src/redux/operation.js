@@ -1,5 +1,6 @@
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://64cacaaf700d50e3c7054b1e.mockapi.io/api/';
 
@@ -10,6 +11,7 @@ export const getAllEvents = createAsyncThunk(
       const response = await axios.get('/events');
       return response.data;
     } catch (error) {
+      toast.error('Something went wrong... Please, try again');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -22,6 +24,7 @@ export const getOneEvent = createAsyncThunk(
       const response = await axios.get(`/events/${eventId}`);
       return response.data;
     } catch (error) {
+      toast.error('Something went wrong... Please, try again');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -34,6 +37,7 @@ export const addEvent = createAsyncThunk(
       const response = await axios.post('/events', event);
       return response.data;
     } catch (error) {
+      toast.error('Something went wrong... Please, try again');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -46,6 +50,7 @@ export const updateEvent = createAsyncThunk(
       const response = await axios.put(`/events/${id}`, event);
       return response.data;
     } catch (error) {
+      toast.error('Something went wrong... Please, try again');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -58,6 +63,7 @@ export const deleteEvent = createAsyncThunk(
       const response = await axios.delete(`/events/${eventId}`);
       return response.data;
     } catch (error) {
+      toast.error('Something went wrong... Please, try again');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
