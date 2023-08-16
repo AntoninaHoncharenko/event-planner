@@ -93,7 +93,7 @@ export const DeleteBtn = styled.button`
   }
 
   svg {
-    stroke: ${props => (props.errorValue ? '#FF2B77' : '#7B61FF')};
+    stroke: ${colors.accent};
   }
 `;
 
@@ -107,7 +107,6 @@ export const Input = styled.input`
   cursor: pointer;
 
   color: ${colors.text};
-  border-color: ${props => (props.errorValue ? '#FF2B77' : '#ACA7C3')};
   font-size: 16px;
   line-height: 1.5;
 
@@ -353,7 +352,8 @@ export const PriorityOption = styled.li`
 `;
 
 export const Error = styled.p`
-  width: 75px;
+  width: 105px;
+  text-align: right;
   color: ${colors.high};
   font-size: 12px;
   line-height: 1.33;

@@ -99,7 +99,7 @@ export const Mark = styled.li`
 `;
 
 export const EventDate = styled.p`
-  width: 139px;
+  width: 142px;
   height: 32px;
   padding: 4px 10px;
   border-radius: 8px;

@@ -41,7 +41,7 @@ const CustomInput = forwardRef(
 
 CustomInput.displayName = 'CustomInput';
 
-export const Calendar = ({ setDate, dateValue }) => {
+export const Calendar = ({ setDate, dateValue, updateErrors }) => {
   const [startDate, setStartDate] = useState();
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
@@ -52,6 +52,7 @@ export const Calendar = ({ setDate, dateValue }) => {
   const onDateChange = date => {
     setStartDate(date);
     setDate(date);
+    updateErrors('date');
   };
 
   return (
@@ -85,4 +86,5 @@ CustomInput.propTypes = {
 Calendar.propTypes = {
   setDate: PropTypes.func,
   dateValue: PropTypes.string,
+  updateErrors: PropTypes.func,
 };

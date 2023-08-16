@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { ReactComponent as SelectIconUp } from '../../assets/arrow-select1.svg';
 import { ReactComponent as SelectIconDown } from '../../assets/arrow-select.svg';
 
-export const Time = ({ setTime, time }) => {
+export const Time = ({ setTime, time, updateErrors }) => {
   const [isPickerOpen, setIsPickerOpen] = useState(false);
 
   const mobile = useMedia('(max-width: 767px)', { defaultState: false });
@@ -16,6 +16,7 @@ export const Time = ({ setTime, time }) => {
 
   const onChange = (time, timeString) => {
     setTime(timeString);
+    updateErrors('time');
   };
 
   const onOpenChange = open => {
@@ -40,7 +41,6 @@ export const Time = ({ setTime, time }) => {
           width: `${getPickerWidth()}px`,
           height: '56px',
           padding: '16px 12px',
-          marginBottom: '20px',
           borderRadius: '8px',
           border: '1px solid #ACA7C3',
           backgroundColor: '#FFFFFF',
@@ -62,4 +62,5 @@ export const Time = ({ setTime, time }) => {
 Time.propTypes = {
   setTime: PropTypes.func,
   time: PropTypes.string,
+  updateErrors: PropTypes.func,
 };

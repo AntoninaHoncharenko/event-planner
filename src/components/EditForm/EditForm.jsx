@@ -84,12 +84,10 @@ export const EditForm = () => {
   const clearInput = name => {
     if (name === 'title') {
       setTitle('');
-      updateErrors('title');
     } else if (name === 'description') {
       setDescription('');
     } else if (name === 'location') {
       setLocation('');
-      updateErrors('location');
     } else if (name === 'picture') {
       fileInputRef.current.value = '';
       setPicture(null);
@@ -99,10 +97,13 @@ export const EditForm = () => {
   const handleInputChange = (name, value) => {
     if (name === 'title') {
       setTitle(value);
+      updateErrors('title');
     } else if (name === 'description') {
       setDescription(value);
+      updateErrors('description');
     } else if (name === 'location') {
       setLocation(value);
+      updateErrors('location');
     }
   };
 
@@ -121,11 +122,13 @@ export const EditForm = () => {
   const setCategoryValue = (category, value) => {
     setCategory(category);
     toggleOptions(value);
+    updateErrors('category');
   };
 
   const setPriorityValue = (priority, value) => {
     setPriority(priority);
     toggleOptions(value);
+    updateErrors('priority');
   };
 
   const setPictureValue = event => {
@@ -146,7 +149,12 @@ export const EditForm = () => {
 
   const initialValues = {
     title,
+    description,
+    category,
+    priority,
     location,
+    date,
+    time,
   };
 
   // get data and submit
@@ -186,7 +194,6 @@ export const EditForm = () => {
           {}
         );
         setErrors(errors);
-        console.log(errors);
       });
   };
 
@@ -204,17 +211,12 @@ export const EditForm = () => {
                 onChange={e =>
                   handleInputChange('title', e.currentTarget.value)
                 }
-                errorValue={errors.title}
               />
-              <DeleteBtn
-                type="button"
-                onClick={() => clearInput('title')}
-                errorValue={errors.title}
-              >
+              <DeleteBtn type="button" onClick={() => clearInput('title')}>
                 <DeleteIcon />
               </DeleteBtn>
             </InputWrap>
-            {errors.title && <Error>Invalid input</Error>}
+            {errors.title && <Error>Write title</Error>}
           </Flexitem>
 
           <Flexitem>
@@ -234,16 +236,19 @@ export const EditForm = () => {
                 <DeleteIcon />
               </DeleteBtn>
             </InputWrap>
+            {errors.description && <Error>Write description</Error>}
           </Flexitem>
 
           <Flexitem>
             <Label htmlFor="date">Select date</Label>
             <Calendar setDate={setDate} dateValue={event.date} />
+            {errors.date && <Error>Select date</Error>}
           </Flexitem>
 
           <Flexitem>
             <Label htmlFor="time">Select time</Label>
             <Time setTime={setTime} time={time} />
+            {errors.time && <Error>Select time</Error>}
           </Flexitem>
 
           <Flexitem>
@@ -256,17 +261,12 @@ export const EditForm = () => {
                 onChange={e =>
                   handleInputChange('location', e.currentTarget.value)
                 }
-                errorValue={errors.location}
               />
-              <DeleteBtn
-                type="button"
-                onClick={() => clearInput('location')}
-                errorValue={errors.location}
-              >
+              <DeleteBtn type="button" onClick={() => clearInput('location')}>
                 <DeleteIcon />
               </DeleteBtn>
             </InputWrap>
-            {errors.location && <Error>Invalid input</Error>}
+            {errors.location && <Error>Write location</Error>}
           </Flexitem>
 
           <Flexitem>
@@ -298,6 +298,7 @@ export const EditForm = () => {
                 </OptionsWrap>
               )}
             </SelectWrap>
+            {errors.category && <Error>Select category</Error>}
           </Flexitem>
 
           <Flexitem>
@@ -354,6 +355,7 @@ export const EditForm = () => {
               )}
             </SelectWrap>
           </Flexitem>
+          {errors.priority && <Error>Select priority</Error>}
         </FlexWrap>
 
         <Button type="submit">Save</Button>

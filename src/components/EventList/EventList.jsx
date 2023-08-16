@@ -30,26 +30,15 @@ export const EventList = ({ events }) => {
                 loading="lazy"
               />
               <MarksWrap>
-                {event.category && <Category>{event.category}</Category>}
-                {event.priority && (
-                  <Priority priority={event.priority}>
-                    {event.priority}
-                  </Priority>
-                )}
+                <Category>{event.category}</Category>
+                <Priority priority={event.priority}>{event.priority}</Priority>
               </MarksWrap>
               <Overlay>
                 <DetailsWrap>
                   <p>
-                    {event.date && (
-                      <span>{format(new Date(event.date), 'd.MM')} </span>
-                    )}
-
-                    {event.time && (
-                      <>
-                        <span>at</span>
-                        <span> {event.time && event.time.slice(0, -3)}</span>
-                      </>
-                    )}
+                    <span>{format(new Date(event.date), 'd.MM')} </span>
+                    <span>at</span>
+                    <span> {event.time && event.time.slice(0, -3)}</span>
                   </p>
                   <p>{event.location}</p>
                 </DetailsWrap>
@@ -57,7 +46,6 @@ export const EventList = ({ events }) => {
             </ImgThumb>
             <InfoWrap>
               <Title>{event.title}</Title>
-              {/* <Text>{event.description}</Text> */}
               <Text
                 line={4}
                 element="p"

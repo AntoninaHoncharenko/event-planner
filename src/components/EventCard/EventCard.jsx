@@ -64,16 +64,12 @@ export const EventCard = () => {
         <InfoWrap>
           <Text>{event.description}</Text>
           <MarksWrap>
-            {event.category && <Mark>{event.category}</Mark>}
-            {event.priority && (
-              <Mark priority={event.priority}>{event.priority}</Mark>
-            )}
+            <Mark>{event.category}</Mark>
+            <Mark priority={event.priority}>{event.priority}</Mark>
             <Mark>{event.location}</Mark>
             {tablet && (event.date || event.time) && (
               <EventDate>
-                {event.date && (
-                  <span>{format(new Date(event.date), 'd.MM')} </span>
-                )}
+                <span>{format(new Date(event.date), 'd.MM')} </span>
                 at
                 <span> {event.time} </span>
               </EventDate>
@@ -81,9 +77,7 @@ export const EventCard = () => {
           </MarksWrap>
           {!tablet && (event.date || event.time) && (
             <EventDate>
-              {event.date && (
-                <span>{format(new Date(event.date), 'd.MM')} </span>
-              )}
+              <span>{format(new Date(event.date), 'd.MM')} </span>
               at
               <span> {event.time} </span>
             </EventDate>
