@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Space, TimePicker } from 'antd';
 import PropTypes from 'prop-types';
+import { Space, TimePicker } from 'antd';
 import { useMedia } from 'react-use';
+import { useState } from 'react';
 import { ReactComponent as SelectIconUp } from '../../assets/arrow-select1.svg';
 import { ReactComponent as SelectIconDown } from '../../assets/arrow-select.svg';
 
@@ -47,6 +47,7 @@ export const Time = ({ setTime, time }) => {
           color: time ? '#3F3F3F' : '#7B61FF',
           fontFamily: 'Poppins',
           fontSize: '16px',
+          cursor: 'pointer',
         }}
         inputReadOnly
         placeholder={'Select time'}

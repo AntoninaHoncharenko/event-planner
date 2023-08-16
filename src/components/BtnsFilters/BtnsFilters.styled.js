@@ -118,6 +118,11 @@ export const PlusBtn = styled(Link)`
   padding: 16px;
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
   cursor: pointer;
+  transition: 300ms linear;
+
+  &:hover {
+    background-color: #6243ff;
+  }
 
   @media (min-width: 768px) {
     width: 193px;
@@ -245,12 +250,22 @@ export const FilterItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: 300ms linear;
+  cursor: pointer;
 
   color: ${props => (props.sort === props.value ? '#7B61FF' : '#ACA7C3')};
   font-size: 14px;
   line-height: 1;
 
+  &:hover {
+    color: ${colors.accent};
+    svg {
+      stroke: ${colors.accent};
+    }
+  }
+
   svg {
+    transition: 300ms linear;
     stroke: ${props => (props.sort === props.value ? '#7B61FF' : '#ACA7C3')};
   }
 

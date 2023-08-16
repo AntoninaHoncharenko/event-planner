@@ -78,6 +78,7 @@ export const DeleteBtn = styled.button`
   padding: 0;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 
   position: absolute;
   top: 16px;
@@ -103,6 +104,7 @@ export const Input = styled.input`
   border-radius: 8px;
   border: 1px solid ${colors.divider};
   outline: none;
+  cursor: pointer;
 
   color: ${colors.text};
   border-color: ${props => (props.errorValue ? '#FF2B77' : '#ACA7C3')};
@@ -125,11 +127,14 @@ export const Input = styled.input`
 export const TextArea = styled.textarea`
   width: 240px;
   height: 156px;
-  padding: 16px 12px;
+  padding: 16px 36px 16px 12px;
   border-radius: 8px;
   border: 1px solid ${colors.divider};
   outline: none;
   resize: none;
+  cursor: pointer;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   color: ${colors.text};
   font-size: 16px;
@@ -174,6 +179,7 @@ export const FileWrap = styled.div`
   height: 64px;
   background-color: ${colors.white};
   position: relative;
+  cursor: pointer;
 
   @media (min-width: 768px) {
     width: 308px;
@@ -217,7 +223,8 @@ export const Button = styled.button`
   transition: 300ms linear;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  :focus {
     background-color: #6243ff;
   }
 
@@ -255,6 +262,7 @@ export const Select = styled.div`
   justify-content: space-between;
   padding: 16px 12px;
   border-radius: 8px;
+  cursor: pointer;
 
   border: 1px solid
     ${props =>
@@ -317,7 +325,8 @@ export const CategoryOption = styled.li`
   transition: 300ms linear;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  :focus {
     color: ${colors.accent};
   }
 `;
@@ -337,7 +346,8 @@ export const PriorityOption = styled.li`
   transition: 300ms linear;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  :focus {
     color: ${colors.accent};
   }
 `;

@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import { useMedia } from 'react-use';
 import PropTypes from 'prop-types';
+import { useMedia } from 'react-use';
+import { useState } from 'react';
+
 import { ReactComponent as Filter1 } from '../../assets/filter1.svg';
 import { ReactComponent as Filter2 } from '../../assets/filter2.svg';
 import { ReactComponent as Plus } from '../../assets/plus.svg';
 import { ReactComponent as ArrowUp } from '../../assets/arrow-up.svg';
+import { categories } from '../../helpers/data';
 import {
   Wrap,
   BtnWrap,
@@ -21,7 +23,6 @@ import {
   CategoryItem,
   FilterItem,
 } from './BtnsFilters.styled';
-import { categories } from '../../helpers/data';
 
 export const BtnsFilters = ({
   filterByName,

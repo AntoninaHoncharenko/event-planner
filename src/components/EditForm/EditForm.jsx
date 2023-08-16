@@ -1,9 +1,23 @@
+import { nanoid } from 'nanoid';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectOneEvent, selectLoading } from '../../redux/selectors';
 import { getOneEvent } from '../../redux/operation';
 import { updateEvent } from '../../redux/operation';
+
+import { Calendar } from '../DatePicker/DatePicker';
+import { Time } from '../TimePicker/TimePicker';
+import { Loader } from '../Loader/Loader';
+import { ReactComponent as SelectIconUp } from '../../assets/arrow-select.svg';
+import { ReactComponent as SelectIconDown } from '../../assets/arrow-select1.svg';
+import { ReactComponent as DeleteIcon } from '../../assets/close-input.svg';
+
+import { categories, priorities } from '../../helpers/data';
+import { schema } from '../../helpers/schema';
+import { storage } from '../../helpers/firebase';
+
 import {
   Form,
   FlexWrap,
@@ -27,17 +41,6 @@ import {
   Button,
   Error,
 } from './EditForm.styled';
-import { ReactComponent as SelectIconUp } from '../../assets/arrow-select.svg';
-import { ReactComponent as SelectIconDown } from '../../assets/arrow-select1.svg';
-import { ReactComponent as DeleteIcon } from '../../assets/close-input.svg';
-import { categories, priorities } from '../../helpers/data';
-import { schema } from '../../helpers/schema';
-import { Calendar } from '../DatePicker/DatePicker';
-import { Time } from '../TimePicker/TimePicker';
-import { nanoid } from 'nanoid';
-import { storage } from '../../helpers/firebase';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { Loader } from '../Loader/Loader';
 
 export const EditForm = () => {
   const { eventId } = useParams();

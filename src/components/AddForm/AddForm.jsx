@@ -1,8 +1,23 @@
+import { nanoid } from 'nanoid';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoading } from '../../redux/selectors';
 import { addEvent } from '../../redux/operation';
+
+import { Calendar } from '../DatePicker/DatePicker';
+import { Time } from '../TimePicker/TimePicker';
+import { ReactComponent as SelectIconUp } from '../../assets/arrow-select.svg';
+import { ReactComponent as SelectIconDown } from '../../assets/arrow-select1.svg';
+import { ReactComponent as DeleteIcon } from '../../assets/close-input.svg';
+import { Loader } from '../Loader/Loader';
+
+import { categories, priorities } from '../../helpers/data';
+import { schema } from '../../helpers/schema';
+import { storage } from '../../helpers/firebase';
+
 import {
   Form,
   FlexWrap,
@@ -26,17 +41,6 @@ import {
   Button,
   Error,
 } from './AddForm.styled';
-import { ReactComponent as SelectIconUp } from '../../assets/arrow-select.svg';
-import { ReactComponent as SelectIconDown } from '../../assets/arrow-select1.svg';
-import { ReactComponent as DeleteIcon } from '../../assets/close-input.svg';
-import { categories, priorities } from '../../helpers/data';
-import { schema } from '../../helpers/schema';
-import { Calendar } from '../DatePicker/DatePicker';
-import { Time } from '../TimePicker/TimePicker';
-import { nanoid } from 'nanoid';
-import { storage } from '../../helpers/firebase';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { Loader } from '../Loader/Loader';
 
 export const AddForm = () => {
   const [title, setTitle] = useState('');

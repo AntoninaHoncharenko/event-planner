@@ -33,7 +33,11 @@ export const Wrap = styled.div`
   }
 `;
 
-export const LangSwitch = styled.div`
+export const LangBtn = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
   display: flex;
   width: 69px;
   height: 48px;
@@ -48,21 +52,11 @@ export const LangSwitch = styled.div`
   @media (min-width: 768px) {
     order: 1;
   }
-`;
 
-export const LangText = styled.p`
   color: ${colors.text};
   font-size: 16px;
   font-weight: 500;
   line-height: 1;
-`;
-
-export const LangBtn = styled.button`
-  background-color: transparent;
-  border: none;
-  width: 24px;
-  height: 24px;
-  padding: 0;
 `;
 
 export const InputWrap = styled.div`
@@ -95,6 +89,7 @@ export const Input = styled.input`
   line-height: 1;
 
   position: absolute;
+  cursor: pointer;
 
   &::placeholder {
     color: #888;
@@ -118,4 +113,5 @@ export const Label = styled.label`
   top: 12px;
   left: 12px;
   z-index: 3;
+  cursor: pointer;
 `;

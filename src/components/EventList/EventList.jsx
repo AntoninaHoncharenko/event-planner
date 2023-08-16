@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { format } from 'date-fns';
+import DefaultImg from '../../assets/default-small.png';
 import {
   List,
   Card,
@@ -15,8 +16,6 @@ import {
   Text,
   MoreBtn,
 } from './EventList.styled';
-import { format } from 'date-fns';
-import DefaultImg from '../../assets/default-small.png';
 
 export const EventList = ({ events }) => {
   return (
@@ -25,7 +24,11 @@ export const EventList = ({ events }) => {
         return (
           <Card key={event.id}>
             <ImgThumb>
-              <Image src={event.picture || DefaultImg} alt="image" />
+              <Image
+                src={event.picture || DefaultImg}
+                alt="image"
+                loading="lazy"
+              />
               <MarksWrap>
                 {event.category && <Category>{event.category}</Category>}
                 {event.priority && (
@@ -54,10 +57,14 @@ export const EventList = ({ events }) => {
             </ImgThumb>
             <InfoWrap>
               <Title>{event.title}</Title>
-              <Text>{event.description}</Text>
-              <Link to={`/${event.id}`}>
-                <MoreBtn>More info</MoreBtn>
-              </Link>
+              {/* <Text>{event.description}</Text> */}
+              <Text
+                line={4}
+                element="p"
+                truncateText="…"
+                text={event.description}
+              />
+              <MoreBtn to={`/${event.id}`}>More info</MoreBtn>
             </InfoWrap>
           </Card>
         );

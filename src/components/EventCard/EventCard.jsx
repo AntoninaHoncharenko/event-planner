@@ -1,11 +1,16 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { format } from 'date-fns';
 import { useMedia } from 'react-use';
+import { useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectOneEvent, selectLoading } from '../../redux/selectors';
 import { getOneEvent, deleteEvent } from '../../redux/operation';
+
 import { PageTitle } from '../../components/Title/Title';
-import { format } from 'date-fns';
+import { Loader } from '../Loader/Loader';
+import DefaultImgS from '../../assets/default-small.png';
+import DefaultImgL from '../../assets/default-big.png';
+
 import {
   Title,
   Card,
@@ -19,9 +24,6 @@ import {
   EditBtn,
   DeleteBtn,
 } from './EventCard.styled';
-import DefaultImgS from '../../assets/default-small.png';
-import DefaultImgL from '../../assets/default-big.png';
-import { Loader } from '../Loader/Loader';
 
 export const EventCard = () => {
   const { eventId } = useParams();
@@ -83,7 +85,9 @@ export const EventCard = () => {
           )}
           <BtnWrap>
             <EditBtn to={`/${eventId}/edit`}>Edit</EditBtn>
-            <DeleteBtn onClick={handleDelete}>Delete event</DeleteBtn>
+            <DeleteBtn type="button" onClick={handleDelete}>
+              Delete event
+            </DeleteBtn>
           </BtnWrap>
         </InfoWrap>
       </Card>

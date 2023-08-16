@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import TextTruncate from 'react-text-truncate';
 import { colors } from '../../helpers/vars';
+import { Link } from 'react-router-dom';
 
 export const List = styled.ul`
   margin-bottom: 40px;
@@ -15,7 +17,7 @@ export const List = styled.ul`
   }
 `;
 
-export const MoreBtn = styled.button`
+export const MoreBtn = styled(Link)`
   display: none;
   width: 114px;
   height: 40px;
@@ -63,6 +65,7 @@ export const Card = styled.li`
   overflow: hidden;
   background-color: ${colors.white};
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
+  cursor: pointer;
 
   @media (min-width: 768px) {
     width: 332px;
@@ -154,10 +157,12 @@ export const Title = styled.h2`
   margin-bottom: 16px;
 `;
 
-export const Text = styled.p`
-  width: 240px;
-  height: 78px;
+export const Text = styled(TextTruncate)`
+  width: 100%;
+  height: 80px;
   color: #49454f;
   font-size: 14px;
   line-height: 1.42;
+  /* overflow-y: auto;
+  overflow-x: hidden; */
 `;

@@ -1,5 +1,5 @@
-import { LinkBack, BackText } from './BackLink.styled';
 import { ReactComponent as BackIcon } from '../../assets/arrow-back.svg';
+import { LinkBack, BackText } from './BackLink.styled';
 
 export const BackLink = () => {
   return (

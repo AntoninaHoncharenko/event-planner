@@ -1,11 +1,12 @@
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { Select, SelectText } from './DatePicker.styled';
+import format from 'date-fns/format';
+import { useState, forwardRef } from 'react';
+
 import { ReactComponent as SelectIconDown } from '../../assets/arrow-select.svg';
 import { ReactComponent as SelectIconUp } from '../../assets/arrow-select1.svg';
-import format from 'date-fns/format';
+import { Select, SelectText } from './DatePicker.styled';
 
 const CustomInput = forwardRef(
   ({ value, onClick, isCalendarOpen, setIsCalendarOpen, dateValue }, ref) => {
