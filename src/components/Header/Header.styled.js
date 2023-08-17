@@ -33,32 +33,6 @@ export const Wrap = styled.div`
   }
 `;
 
-export const LangBtn = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-
-  display: flex;
-  width: 69px;
-  height: 48px;
-  padding: 12px 4px 12px 12px;
-  align-items: center;
-  gap: 4px;
-
-  border-radius: 8px;
-  background-color: ${colors.white};
-  box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
-
-  @media (min-width: 768px) {
-    order: 1;
-  }
-
-  color: ${colors.text};
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1;
-`;
-
 export const InputWrap = styled.div`
   width: 272px;
   height: 48px;
@@ -67,11 +41,11 @@ export const InputWrap = styled.div`
 
   @media (min-width: 768px) {
     width: 368px;
-    margin: 0 24px 0 80px;
+    margin-top: 0;
+    max-lines: auto;
   }
   @media (min-width: 1440px) {
     width: 410px;
-    margin: 0 24px 0 auto;
   }
 `;
 
