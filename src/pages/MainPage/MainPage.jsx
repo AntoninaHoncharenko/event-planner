@@ -20,7 +20,6 @@ const MainPage = () => {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  console.log(totalPages);
 
   const mob = useMedia('(max-width: 767px)', { defaultState: false });
   const tablet = useMedia('(min-width: 768px) and (max-width: 1339px)', {
