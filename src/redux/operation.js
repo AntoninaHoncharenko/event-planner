@@ -4,6 +4,19 @@ import toast from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://64cacaaf700d50e3c7054b1e.mockapi.io/api/';
 
+export const getLimitedEvents = createAsyncThunk(
+  'events/getPart',
+  async ({ page, limit }, thunkAPI) => {
+    try {
+      const response = await axios.get(`/events?page=${page}&limit=${limit}`);
+      return response.data;
+    } catch (error) {
+      toast.error('Something went wrong... Please, try again');
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const getAllEvents = createAsyncThunk(
   'events/getAll',
   async (_, thunkAPI) => {

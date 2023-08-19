@@ -1,6 +1,7 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   getAllEvents,
+  getLimitedEvents,
   getOneEvent,
   addEvent,
   deleteEvent,
@@ -8,6 +9,7 @@ import {
 } from './operation';
 
 const initialState = {
+  allEvents: [],
   events: [],
   oneEvent: {},
   isLoading: false,
@@ -16,6 +18,7 @@ const initialState = {
 
 const extaActions = [
   getAllEvents,
+  getLimitedEvents,
   getOneEvent,
   addEvent,
   deleteEvent,
@@ -37,8 +40,12 @@ const rejectedReducer = (state, action) => {
   state.error = action.payload;
 };
 
-const getAllEventsReducer = (state, action) => {
+const getLimitedEventsReducer = (state, action) => {
   state.events = action.payload;
+};
+
+const getAllEventsReducer = (state, action) => {
+  state.allEvents = action.payload;
 };
 
 const getOneEventReducer = (state, action) => {
@@ -68,6 +75,7 @@ export const eventsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getAllEvents.fulfilled, getAllEventsReducer)
+      .addCase(getLimitedEvents.fulfilled, getLimitedEventsReducer)
       .addCase(getOneEvent.fulfilled, getOneEventReducer)
       .addCase(addEvent.fulfilled, addEventReducer)
       .addCase(deleteEvent.fulfilled, deleteEventReducer)
