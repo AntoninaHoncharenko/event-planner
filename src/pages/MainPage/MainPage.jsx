@@ -22,8 +22,8 @@ const MainPage = () => {
   const [totalPages, setTotalPages] = useState(0);
 
   const mob = useMedia('(max-width: 767px)', { defaultState: false });
-  const tablet = useMedia('(min-width: 768px) and (max-width: 1339px)', {
-    defaultMatches: false,
+  const tablet = useMedia('(min-width: 768px) and (max-width: 1439px)', {
+    defaultState: false,
   });
   const desk = useMedia('(min-width: 1440px)', { defaultState: true });
 

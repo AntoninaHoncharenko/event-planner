@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import toast from 'react-hot-toast';
+import format from 'date-fns/format';
 
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -40,6 +41,7 @@ import {
   Wrap,
   FileText,
   Button,
+  CalendarWrap,
   Error,
 } from './AddForm.styled';
 
@@ -50,13 +52,14 @@ export const AddForm = () => {
   const [picture, setPicture] = useState('');
   const [category, setCategory] = useState('Select category');
   const [priority, setPriority] = useState('Select priority');
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState('Select date');
   const [time, setTime] = useState(null);
 
   const fileInputRef = useRef(null);
 
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isPrioritiesOpen, setIsPrioritiesOpen] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const isLoading = useSelector(selectLoading);
 
@@ -89,14 +92,19 @@ export const AddForm = () => {
   const toggleOptions = value => {
     if (value === 'category') {
       setIsCategoriesOpen(prevState => !prevState);
-    } else {
+    } else if (value === 'priority') {
       setIsPrioritiesOpen(prevState => !prevState);
     }
   };
 
-  const changeOptions = value => {
-    toggleOptions(value);
+  const toggleCalendar = () => {
+    setIsCalendarOpen(prevState => !prevState);
+    updateErrors('date');
   };
+
+  // const changeOptions = value => {
+  //   toggleOptions(value);
+  // };
 
   const setCategoryValue = (category, value) => {
     setCategory(category);
@@ -220,8 +228,27 @@ export const AddForm = () => {
           </Flexitem>
 
           <Flexitem>
-            <Label htmlFor="date">Select date</Label>
-            <Calendar setDate={setDate} updateErrors={updateErrors} />
+            <FakeLabel>Select date</FakeLabel>
+            <SelectWrap>
+              <Select onClick={toggleCalendar} isCalendarOpen={isCalendarOpen}>
+                <SelectText date={date}>
+                  {date === 'Select date'
+                    ? date
+                    : format(new Date(date), 'dd/MM/yyyy')}
+                </SelectText>
+                {isCalendarOpen ? <SelectIconDown /> : <SelectIconUp />}
+              </Select>
+            </SelectWrap>
+            {isCalendarOpen && (
+              <CalendarWrap>
+                <Calendar
+                  setDate={setDate}
+                  date={date}
+                  toggleCalendar={toggleCalendar}
+                />
+              </CalendarWrap>
+            )}
+
             {errors.date && <Error>Select date</Error>}
           </Flexitem>
 
@@ -253,7 +280,7 @@ export const AddForm = () => {
             <FakeLabel>Category</FakeLabel>
             <SelectWrap>
               <Select
-                onClick={() => changeOptions('category')}
+                onClick={() => toggleOptions('category')}
                 isCategoriesOpen={isCategoriesOpen}
               >
                 <SelectText category={category}>{category}</SelectText>
@@ -309,7 +336,7 @@ export const AddForm = () => {
             <FakeLabel>Priority</FakeLabel>
             <SelectWrap>
               <Select
-                onClick={() => changeOptions('priority')}
+                onClick={() => toggleOptions('priority')}
                 isPrioritiesOpen={isPrioritiesOpen}
               >
                 <SelectText priority={priority}>{priority}</SelectText>

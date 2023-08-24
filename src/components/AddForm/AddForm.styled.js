@@ -265,7 +265,9 @@ export const Select = styled.div`
 
   border: 1px solid
     ${props =>
-      props.isCategoriesOpen || props.isPrioritiesOpen ? '#7B61FF' : '#ACA7C3'};
+      props.isCategoriesOpen || props.isPrioritiesOpen || props.isCalendarOpen
+        ? '#7B61FF'
+        : '#ACA7C3'};
   outline: none;
 
   color: ${colors.text};
@@ -283,7 +285,9 @@ export const Select = styled.div`
 
 export const SelectText = styled.p`
   color: ${props =>
-    props.category === 'Select category' || props.priority === 'Select priority'
+    props.category === 'Select category' ||
+    props.priority === 'Select priority' ||
+    props.date === 'Select date'
       ? '#7B61FF'
       : '#3F3F3F'};
   font-size: 16px;
@@ -349,6 +353,11 @@ export const PriorityOption = styled.li`
   :focus {
     color: ${colors.accent};
   }
+`;
+
+export const CalendarWrap = styled.div`
+  position: absolute;
+  z-index: 3;
 `;
 
 export const Error = styled.p`
