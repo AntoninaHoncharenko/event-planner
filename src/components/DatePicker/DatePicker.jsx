@@ -48,6 +48,7 @@ export const Calendar = ({ setDate, date, toggleCalendar }) => {
           setMonth(today);
           setDate('Select date');
           setDateValue(null);
+          toggleCalendar();
         }}
       >
         Cancel

@@ -258,7 +258,10 @@ export const EditForm = () => {
             <SelectWrap>
               <Select onClick={toggleCalendar} isCalendarOpen={isCalendarOpen}>
                 <SelectText date={date}>
-                  {date !== undefined && format(new Date(date), 'dd/MM/yyyy')}
+                  {date === 'Select date'
+                    ? date
+                    : date !== undefined &&
+                      format(new Date(date), 'dd/MM/yyyy')}
                 </SelectText>
                 {isCalendarOpen ? <SelectIconDown /> : <SelectIconUp />}
               </Select>
