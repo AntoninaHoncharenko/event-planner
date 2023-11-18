@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import toast from 'react-hot-toast';
+import format from 'date-fns/format';
 
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -42,6 +43,7 @@ import {
   FileText,
   Button,
   Error,
+  CalendarWrap,
 } from './EditForm.styled';
 
 export const EditForm = () => {
@@ -80,6 +82,7 @@ export const EditForm = () => {
 
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isPrioritiesOpen, setIsPrioritiesOpen] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const clearInput = name => {
     if (name === 'title') {
@@ -113,6 +116,11 @@ export const EditForm = () => {
     } else {
       setIsPrioritiesOpen(prevState => !prevState);
     }
+  };
+
+  const toggleCalendar = () => {
+    setIsCalendarOpen(prevState => !prevState);
+    updateErrors('date');
   };
 
   const changeOptions = value => {
@@ -239,9 +247,32 @@ export const EditForm = () => {
             {errors.description && <Error>Write description</Error>}
           </Flexitem>
 
-          <Flexitem>
+          {/* <Flexitem>
             <Label htmlFor="date">Select date</Label>
             <Calendar setDate={setDate} dateValue={event.date} />
+            {errors.date && <Error>Select date</Error>}
+          </Flexitem> */}
+
+          <Flexitem>
+            <FakeLabel>Select date</FakeLabel>
+            <SelectWrap>
+              <Select onClick={toggleCalendar} isCalendarOpen={isCalendarOpen}>
+                <SelectText date={date}>
+                  {date !== undefined && format(new Date(date), 'dd/MM/yyyy')}
+                </SelectText>
+                {isCalendarOpen ? <SelectIconDown /> : <SelectIconUp />}
+              </Select>
+            </SelectWrap>
+            {isCalendarOpen && (
+              <CalendarWrap>
+                <Calendar
+                  setDate={setDate}
+                  date={date}
+                  toggleCalendar={toggleCalendar}
+                />
+              </CalendarWrap>
+            )}
+
             {errors.date && <Error>Select date</Error>}
           </Flexitem>
 

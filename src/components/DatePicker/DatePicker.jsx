@@ -32,8 +32,8 @@ export const Calendar = ({ setDate, date, toggleCalendar }) => {
     background-color: #ffffff;
     width: ${mob ? '240px' : tablet ? '308px' : '372px'};
     padding: 20px;
-    padding-left: ${tablet ? '54px' : '86px'};
-    padding-right: ${tablet ? '54px' : '86px'};
+    padding-left: ${mob ? '20px' : tablet ? '54px' : '86px'};
+    padding-right: ${mob ? '20px' : tablet ? '54px' : '86px'};
     margin: 8px 0 0 0;
     border-radius: 11px;
     box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.07);

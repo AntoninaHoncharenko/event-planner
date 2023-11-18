@@ -356,3 +356,8 @@ export const Error = styled.p`
   line-height: 1.33;
   margin: 4px 19px 0 auto;
 `;
+
+export const CalendarWrap = styled.div`
+  position: absolute;
+  z-index: 3;
+`;
